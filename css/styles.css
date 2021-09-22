@@ -73,6 +73,11 @@ body {
   color: white;
   padding: 0 10px;
   font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.my-watchlist-anchor {
+  cursor: pointer;
 }
 
 #logo {
@@ -93,15 +98,34 @@ body {
   padding: 15px 25px;
   width: 100%;
   border-style: none;
+
+  /* outline: none; */
   background-color: rgba(255, 255, 255, 0.224);
+}
+
+.search-bar:focus {
+  outline: none;
+  border: none;
+  box-shadow: 0 0 0 1.5px white;
+  transition: 0.15s;
+}
+
+button {
+  background: transparent;
+  border: none;
+  position: absolute;
+  top: 167px;
+  right: 20px;
+  cursor: pointer;
 }
 
 #search-icon {
   position: absolute;
-  top: 167px;
-  right: 20px;
+  right: 0;
+  font-size: 1rem;
   color: white;
   opacity: 0.5;
+  cursor: pointer;
 }
 
 ::placeholder {
@@ -111,11 +135,6 @@ body {
 
 input {
   font-size: 1.1rem;
-}
-
-input,
-textarea:focus {
-  outline-color: white;
 }
 
 .white {

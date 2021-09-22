@@ -22,7 +22,7 @@
         <div class="container">
           <div class="row justify-right">
             <i class="far fa-bookmark" id="bookmark-icon"></i>
-            <a class="white font-roboto">My Watchlist</a>
+            <a class="my-watchlist-anchor white font-roboto">My Watchlist</a>
           </div>
         </div>
       </div>
@@ -33,16 +33,18 @@
   <main>
     <div class="container">
       <div data-view="search-home" class="home-content">
-        <div class="row justify-center">
-          <i class="fas fa-film" id="logo"></i>
-        </div>
-        <div class="row justify-center">
-          <h1 class="white font-roboto movie-journal-margin">MovieJournal</h1>
-        </div>
-        <div class="row justify-center row-search">
-          <input class="search-bar font-roboto white" type="text" placeholder="Search by movie title">
-          <i class="fas fa-search" id="search-icon"></i>
-        </div>
+        <form>
+          <div class="row justify-center">
+            <i class="fas fa-film" id="logo"></i>
+          </div>
+          <div class="row justify-center">
+            <h1 class="white font-roboto movie-journal-margin">MovieJournal</h1>
+          </div>
+          <div class="row justify-center row-search">
+            <input name="search" class="search-bar font-roboto white" type="text" placeholder="Search by movie title" required>
+            <button type="submit"><i class="fas fa-search" id="search-icon"></i></button>
+          </div>
+        </form>
       </div>
     </div>
   </main>
