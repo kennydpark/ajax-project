@@ -1,0 +1,118 @@
+body {
+  background:
+    linear-gradient(rgb(25, 25, 50), rgba(25, 25, 50, 0.5)),
+    linear-gradient(rgba(25, 25, 50, 0.5), rgb(25, 25, 50)),
+    url('../images/final-background-image.png') center;
+  background-size: 1859px 1639px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-right {
+  justify-content: right;
+}
+
+.row-nav-full {
+  margin-top: 10px;
+}
+
+.column-nav-full {
+  width: 90%;
+  margin: auto;
+}
+
+.home-content {
+  position: relative;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 180px;
+}
+
+#bookmark-icon {
+  color: white;
+  padding: 0 10px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.my-watchlist-anchor {
+  cursor: pointer;
+}
+
+#logo {
+  font-size: 2.7rem;
+  color: white;
+}
+
+.movie-journal-margin {
+  margin: 15px 0;
+}
+
+.row-search {
+  padding-top: 40px;
+}
+
+.search-bar {
+  border-radius: 25px;
+  padding: 15px 25px;
+  width: 100%;
+  border-style: none;
+  background-color: rgba(255, 255, 255, 0.224);
+  position: relative;
+}
+
+.search-bar:focus {
+  outline: none;
+  border: none;
+  box-shadow: 0 0 0 1.5px white;
+  transition: 0.15s;
+}
+
+.search-button {
+  background: transparent;
+  border: none;
+  position: relative;
+  bottom: 34px;
+  right: 15px;
+  cursor: pointer;
+}
+
+#search-icon {
+  position: relative;
+  font-size: 1rem;
+  color: white;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+#search-icon:hover {
+  opacity: 1;
+  transition: 0.15s;
+}
+
+::placeholder {
+  color: white;
+  opacity: 0.5;
+}
+
+input {
+  font-size: 1.1rem;
+}
+
+.white {
+  color: white;
+}
+
+.font-roboto {
+  font-family: 'Roboto', sans-serif;
+}
