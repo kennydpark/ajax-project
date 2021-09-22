@@ -6,6 +6,16 @@ body {
   background-size: 1859px 1639px;
 }
 
+.hidden {
+  display: none;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
 .text-center {
   text-align: center;
 }
@@ -20,6 +30,14 @@ body {
 
 .justify-right {
   justify-content: right;
+}
+
+.justify-left {
+  justify-content: left;
+}
+
+.col-nav {
+  margin-left: auto;
 }
 
 .row-nav-full {
@@ -43,6 +61,11 @@ body {
   padding: 0 10px;
   font-size: 1.2rem;
   cursor: pointer;
+}
+
+.movie-journal-anchor {
+  font-weight: bolder;
+  font-size: 1.4rem;
 }
 
 .my-watchlist-anchor {
@@ -95,6 +118,14 @@ body {
   cursor: pointer;
 }
 
+.search-icon {
+  position: relative;
+  font-size: 1rem;
+  color: white;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
 #search-icon:hover {
   opacity: 1;
   transition: 0.15s;
@@ -105,6 +136,76 @@ body {
   opacity: 0.5;
 }
 
+/* search results */
+
+.row-search-results {
+  padding-top: 20px;
+}
+
+.search-results-content {
+  position: relative;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.search-result-card {
+  border-radius: 25px;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.column-one-half {
+  width: 70%;
+
+  /* border: 0.5px dotted white; */
+}
+
+.column-one-half-poster {
+  width: 30%;
+}
+
+.poster-small {
+  object-fit: cover;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  width: 100%;
+
+  /* height: 100%; */
+}
+
+.search-result-title {
+  margin: 10px 15px;
+}
+
+.search-result-year {
+  margin: 15px 15px;
+  margin-bottom: 10px;
+
+  /* font-size: 0.8rem; */
+}
+
+.search-result-genre {
+  margin: 0 15px;
+  padding-bottom: 15px;
+}
+
+.row-icon {
+  padding-top: 10px;
+  padding-right: 15px;
+}
+
+#search-result-plus-icon {
+  font-size: 1.7rem;
+}
+
+.search-results-padding {
+  padding-bottom: 15px;
+}
+
+/* etc. */
 input {
   font-size: 1.1rem;
 }

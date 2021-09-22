@@ -18,9 +18,14 @@
     <div class="row row-nav-full">
       <div class="column-nav-full">
         <div class="container">
-          <div class="row justify-right">
-            <i class="far fa-bookmark" id="bookmark-icon"></i>
-            <a class="my-watchlist-anchor white font-roboto">My Watchlist</a>
+          <div class="row">
+            <div class="column justify-left">
+              <a class="movie-journal-anchor white font-roboto">MovieJournal</a>
+            </div>
+            <div class="col-nav justify-right">
+              <i class="far fa-bookmark" id="bookmark-icon"></i>
+              <a class="my-watchlist-anchor white font-roboto">My Watchlist</a>
+            </div>
           </div>
         </div>
       </div>
@@ -30,7 +35,7 @@
   </header>
   <main>
     <div class="container">
-      <div data-view="search-home" class="home-content">
+      <div data-view="search-home" class="home-content hidden">
         <form>
           <div class="row justify-center">
             <i class="fas fa-film" id="logo"></i>
@@ -40,9 +45,42 @@
           </div>
           <div class="row justify-right row-search">
             <input name="search" class="search-bar font-roboto white" type="text" placeholder="Search by movie title" required>
-            <button class="search-button" type="submit"><i class="fas fa-search" id="search-icon"></i></button>
+            <button class="search-button" type="submit"><i class="fas fa-search search-icon"></i></button>
           </div>
         </form>
+      </div>
+
+      <div data-view="search-results" class="search-results-content">
+
+        <div class="row justify-right row-search-results">
+          <input name="search" class="search-bar font-roboto white" type="text" placeholder="Search by movie title" required>
+          <button class="search-button" type="submit"><i class="fas fa-search search-icon"></i></button>
+        </div>
+        <ul>
+
+          <li class="search-results-padding">
+            <div class="row search-result-card">
+              <div class="column-one-half-poster">
+                <img class="poster-small" src="images/avengers-poster.jpg">
+              </div>
+              <div class="column-one-half white font-roboto">
+                <div class="row row-icon justify-right">
+                  <i id="search-result-plus-icon" class="fas fa-plus-circle"></i>
+                </div>
+                <div class="row">
+                  <h3 class="search-result-title">The Avengers The Avengers The Avengers</h3>
+                </div>
+                <div class="row">
+                  <p class="search-result-year">2012</p>
+                </div>
+                <div class="row">
+                  <p class="search-result-genre">Action, Adventure, Sci-Fi</p>
+                </div>
+              </div>
+            </div>
+          </li>
+
+        </ul>
       </div>
     </div>
   </main>
