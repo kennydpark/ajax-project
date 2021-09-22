@@ -16,26 +16,7 @@ body {
   background-position: center;
   background-repeat: repeat-x;
   object-fit: fill;
-
-  /* transform: scale(1.5, 1.5) */
-
-  /* opacity: 0.5; */
 }
-
-/* .overlay {
-  position: absolute;
-  height: 100px;
-  width: 100px;
-  top: 50px;
-  bottom: 50px;
-  right: 50px;
-  left: 50px;
-
-  /* background-color: black; */
-
-/* background-color: rgba(25, 25, 50, 1)); */
-
-/* } */
 
 .text-center {
   text-align: center;
@@ -98,8 +79,6 @@ body {
   padding: 15px 25px;
   width: 100%;
   border-style: none;
-
-  /* outline: none; */
   background-color: rgba(255, 255, 255, 0.224);
 }
 
