@@ -1,7 +1,3 @@
-body {
-  /* background-image: url('../images/background-image.jpeg'); */
-}
-
 .background-image {
   position: fixed;
   top: 0;
@@ -9,9 +5,6 @@ body {
   right: 0;
   left: 0;
   z-index: -1;
-
-  /* background-color: #191932; */
-
   background: linear-gradient(rgb(25, 25, 50), rgba(25, 25, 50, 0.5)), linear-gradient(rgba(25, 25, 50, 0.5), rgb(25, 25, 50)), url('../images/final-background-image.png');
   background-position: center;
   background-repeat: repeat-x;
