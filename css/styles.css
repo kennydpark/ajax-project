@@ -1,14 +1,9 @@
-.background-image {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  z-index: -1;
-  background: linear-gradient(rgb(25, 25, 50), rgba(25, 25, 50, 0.5)), linear-gradient(rgba(25, 25, 50, 0.5), rgb(25, 25, 50)), url('../images/final-background-image.png');
-  background-position: center;
-  background-repeat: repeat-x;
-  object-fit: fill;
+body {
+  background:
+    linear-gradient(rgb(25, 25, 50), rgba(25, 25, 50, 0.5)),
+    linear-gradient(rgba(25, 25, 50, 0.5), rgb(25, 25, 50)),
+    url('../images/final-background-image.png') center;
+  background-size: 1859px 1639px;
 }
 
 .text-center {
@@ -38,9 +33,9 @@
 
 .home-content {
   position: relative;
-  top: 180px;
   width: 90%;
-  margin: auto;
+  margin: 0 auto;
+  margin-top: 180px;
 }
 
 #bookmark-icon {
@@ -73,6 +68,7 @@
   width: 100%;
   border-style: none;
   background-color: rgba(255, 255, 255, 0.224);
+  position: relative;
 }
 
 .search-bar:focus {
@@ -82,18 +78,17 @@
   transition: 0.15s;
 }
 
-button {
+.search-button {
   background: transparent;
   border: none;
-  position: absolute;
-  top: 167px;
-  right: 20px;
+  position: relative;
+  bottom: 34px;
+  right: 15px;
   cursor: pointer;
 }
 
 #search-icon {
-  position: absolute;
-  right: 0;
+  position: relative;
   font-size: 1rem;
   color: white;
   opacity: 0.5;
