@@ -1,0 +1,116 @@
+body {
+  /* background-image: url('../images/background-image.jpeg'); */
+}
+
+.background-image {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: -1;
+
+  /* background-color: #191932; */
+
+  background: linear-gradient(rgb(25, 25, 50), rgba(25, 25, 50, 0.5)), linear-gradient(rgba(25, 25, 50, 0.5), rgb(25, 25, 50)), url('../images/rotated-background-image.jpg');
+  background-position: center;
+  object-fit: cover;
+  transform: scale(1.5, 1.5)
+
+  /* opacity: 0.5; */
+}
+
+/* .overlay {
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  top: 50px;
+  bottom: 50px;
+  right: 50px;
+  left: 50px;
+
+  /* background-color: black; */
+
+/* background-color: rgba(25, 25, 50, 1)); */
+
+/* } */
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-right {
+  justify-content: right;
+}
+
+.row-nav-full {
+  margin-top: 10px;
+}
+
+.column-nav-full {
+  width: 90%;
+  margin: auto;
+}
+
+.home-content {
+  position: relative;
+  top: 200px;
+  width: 90%;
+  margin: auto;
+}
+
+#bookmark-icon {
+  color: white;
+  padding: 0 10px;
+  font-size: 1.2rem;
+}
+
+#logo {
+  font-size: 2.7rem;
+  color: white;
+}
+
+.movie-journal-margin {
+  margin: 15px 0;
+}
+
+.row-search {
+  padding-top: 20px;
+}
+
+.search-bar {
+  border-radius: 25px;
+  padding: 15px 20px;
+  width: 100%;
+  border-style: none;
+  background-color: rgba(255, 255, 255, 0.224);
+}
+
+#search-icon {
+  position: absolute;
+  top: 140px;
+  right: 20px;
+  color: white;
+  opacity: 0.5;
+}
+
+::placeholder {
+  color: white;
+  opacity: 0.5;
+}
+
+.white {
+  color: white;
+}
+
+.font-roboto {
+  font-family: 'Roboto', sans-serif;
+}
