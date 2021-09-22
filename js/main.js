@@ -16,8 +16,6 @@ function apiRequest(search) {
   xhr.responseType = 'json';
   xhr.addEventListener('load', getMovieData);
   function getMovieData() {
-    // console.log(xhr.status);
-    // console.log(xhr.response);
   }
   xhr.send();
 }
