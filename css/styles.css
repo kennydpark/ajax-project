@@ -100,6 +100,11 @@ button {
   cursor: pointer;
 }
 
+#search-icon:hover {
+  opacity: 1;
+  transition: 0.15s;
+}
+
 ::placeholder {
   color: white;
   opacity: 0.5;
