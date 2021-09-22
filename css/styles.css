@@ -12,10 +12,12 @@ body {
 
   /* background-color: #191932; */
 
-  background: linear-gradient(rgb(25, 25, 50), rgba(25, 25, 50, 0.5)), linear-gradient(rgba(25, 25, 50, 0.5), rgb(25, 25, 50)), url('../images/rotated-background-image.jpg');
+  background: linear-gradient(rgb(25, 25, 50), rgba(25, 25, 50, 0.5)), linear-gradient(rgba(25, 25, 50, 0.5), rgb(25, 25, 50)), url('../images/final-background-image.png');
   background-position: center;
-  object-fit: cover;
-  transform: scale(1.5, 1.5)
+  background-repeat: repeat-x;
+  object-fit: fill;
+
+  /* transform: scale(1.5, 1.5) */
 
   /* opacity: 0.5; */
 }
@@ -62,7 +64,7 @@ body {
 
 .home-content {
   position: relative;
-  top: 200px;
+  top: 180px;
   width: 90%;
   margin: auto;
 }
@@ -83,12 +85,12 @@ body {
 }
 
 .row-search {
-  padding-top: 20px;
+  padding-top: 40px;
 }
 
 .search-bar {
   border-radius: 25px;
-  padding: 15px 20px;
+  padding: 15px 25px;
   width: 100%;
   border-style: none;
   background-color: rgba(255, 255, 255, 0.224);
@@ -96,7 +98,7 @@ body {
 
 #search-icon {
   position: absolute;
-  top: 140px;
+  top: 167px;
   right: 20px;
   color: white;
   opacity: 0.5;
@@ -105,6 +107,15 @@ body {
 ::placeholder {
   color: white;
   opacity: 0.5;
+}
+
+input {
+  font-size: 1.1rem;
+}
+
+input,
+textarea:focus {
+  outline-color: white;
 }
 
 .white {
