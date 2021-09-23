@@ -1,7 +1,7 @@
 /* exported data */
 var data = {
   view: '',
-  searches: [],
+  searchHistory: [],
   editing: null,
   nextSearchId: 1
 };

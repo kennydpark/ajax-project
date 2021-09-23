@@ -13,6 +13,20 @@
   width: 100%;
 }
 
+.search-result-title {
+  font-size: 1rem;
+}
+
+.search-result-year,
+.search-result-genre {
+  font-size: 0.8rem;
+}
+
+.poster-small {
+  height: 100%;
+  width: auto;
+}
+
 @media screen and (min-width: 768px) {
   .container {
     max-width: 900px;
@@ -25,5 +39,31 @@
 
   .column-half {
     width: 50%;
+  }
+
+  .search-result-card {
+    height: 230px;
+  }
+
+  .column-one-half {
+    padding-left: 20px;
+  }
+
+  .poster-small {
+    height: 230px;
+    width: 100%;
+  }
+
+  .search-result-title {
+    font-size: 1.5rem;
+  }
+
+  .search-result-year {
+    font-size: 1rem;
+  }
+
+  .search-result-genre {
+    font-size: 1rem;
+    margin-bottom: 20px;
   }
 }

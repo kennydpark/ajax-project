@@ -18,9 +18,14 @@
     <div class="row row-nav-full">
       <div class="column-nav-full">
         <div class="container">
-          <div class="row justify-right">
-            <i class="far fa-bookmark" id="bookmark-icon"></i>
-            <a class="my-watchlist-anchor white font-roboto">My Watchlist</a>
+          <div class="row">
+            <div class="column justify-left">
+              <a id="movie-journal-nav" class="movie-journal-anchor white font-roboto hidden">MovieJournal</a>
+            </div>
+            <div class="col-nav justify-right">
+              <i class="far fa-bookmark" id="bookmark-icon"></i>
+              <a class="my-watchlist-anchor white font-roboto">My Watchlist</a>
+            </div>
           </div>
         </div>
       </div>
@@ -30,8 +35,9 @@
   </header>
   <main>
     <div class="container">
-      <div data-view="search-home" class="home-content">
-        <form>
+
+      <div data-view="search-home" id="home-content" class="view">
+        <form class="home-form">
           <div class="row justify-center">
             <i class="fas fa-film" id="logo"></i>
           </div>
@@ -39,12 +45,25 @@
             <h1 class="white font-roboto movie-journal-margin">MovieJournal</h1>
           </div>
           <div class="row justify-right row-search">
-            <input name="search" class="search-bar font-roboto white" type="text" placeholder="Search by movie title" required>
-            <button class="search-button" type="submit"><i class="fas fa-search" id="search-icon"></i></button>
+            <input name="search" class="search-bar-home font-roboto white" type="text" placeholder="Search by movie title" required>
+            <button class="search-button-home" type="submit"><i class="fas fa-search search-icon"></i></button>
           </div>
         </form>
       </div>
+
+      <div data-view="search-results" id="search-results-content" class="view hidden">
+        <form class="results-form">
+          <div class="row justify-right row-search-results">
+            <input name="search" class="search-bar-results font-roboto white" type="text" placeholder="Search by movie title" required>
+            <button class="search-button-results" type="submit"><i class="fas fa-search search-icon"></i></button>
+          </div>
+        </form>
+        <p class="search-message white font-roboto text-center"></p>
+        <ul>
+        </ul>
+      </div>
     </div>
+
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
