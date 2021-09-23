@@ -11,6 +11,7 @@
 .column-full,
 .column-half {
   width: 100%;
+  margin-bottom: 15px;
 }
 
 .search-result-title {
@@ -27,6 +28,11 @@
   width: auto;
 }
 
+.poster-big {
+  height: 300px;
+  width: auto;
+}
+
 @media screen and (min-width: 768px) {
   .container {
     max-width: 900px;
@@ -34,7 +40,7 @@
 
   .column-full,
   .column-half {
-    padding: 0 0.75rem;
+    padding: 0 10px;
   }
 
   .column-half {
@@ -45,12 +51,17 @@
     height: 230px;
   }
 
-  .column-one-half {
+  .column-card-info {
     padding-left: 20px;
   }
 
   .poster-small {
     height: 230px;
+    width: 100%;
+  }
+
+  .poster-big {
+    height: 400px;
     width: 100%;
   }
 
@@ -65,5 +76,17 @@
   .search-result-genre {
     font-size: 1rem;
     margin-bottom: 20px;
+  }
+
+  .column-year-detailed {
+    padding-right: 30px;
+  }
+
+  .plus-icon-big {
+    padding-left: 100px;
+  }
+
+  .column-add-caption {
+    width: 50%;
   }
 }

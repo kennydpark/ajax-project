@@ -6,6 +6,11 @@ var $movieJournalNav = document.querySelector('#movie-journal-nav');
 var $allView = document.querySelectorAll('.view');
 var responseByIDArray = [];
 var $searchMessage = document.querySelector('.search-message');
+var $backButton = document.querySelector('.back-button');
+var $rowCardAdd = document.querySelector('.row-card-add');
+var $plusButtonBig = document.querySelector('.plus-button-big');
+var $plusIconBig = document.querySelector('.plus-icon-big');
+var $addToWatchlist = document.querySelector('.add-caption');
 
 $searchFormHome.addEventListener('submit', submitSearch);
 function submitSearch(event) {
@@ -105,6 +110,10 @@ function switchView(view) {
   if (view === 'search-home') {
     $movieJournalNav.setAttribute('class', 'movie-journal-anchor white font-roboto hidden');
   }
+  if (view === 'search-result-detailed') {
+    $movieJournalNav.setAttribute('class', 'movie-journal-anchor white font-roboto');
+
+  }
 }
 
 function renderResponse(entry) {
@@ -160,4 +169,17 @@ $movieJournalNav.addEventListener('click', goHome);
 function goHome(event) {
   switchView('search-home');
   $searchFormHome.reset();
+}
+
+$backButton.addEventListener('click', goBack);
+function goBack(event) {
+  switchView('search-results');
+}
+
+$rowCardAdd.addEventListener('click', buttonGreen);
+function buttonGreen(event) {
+  if ((event.target === $plusButtonBig) || (event.target === $plusIconBig) || (event.target === $addToWatchlist)) {
+    $plusIconBig.className = 'fas fa-check-circle plus-icon-big green';
+    $addToWatchlist.textContent = 'Added to Watchlist!';
+  }
 }
