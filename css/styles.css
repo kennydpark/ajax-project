@@ -157,7 +157,8 @@ ul {
   padding-top: 20px;
 }
 
-#search-results-content {
+#search-results-content,
+#search-result-detailed {
   position: relative;
   width: 90%;
   margin: 0 auto;
