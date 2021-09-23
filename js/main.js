@@ -112,7 +112,7 @@ function renderResponse(entry) {
   var $rowCard = document.createElement('div');
   var $columnPoster = document.createElement('div');
   var $imgPoster = document.createElement('img');
-  var $columnOneHalf = document.createElement('div');
+  var $columnCardInfo = document.createElement('div');
   var $rowIcon = document.createElement('div');
   var $plusIcon = document.createElement('i');
   var $rowTitle = document.createElement('div');
@@ -121,33 +121,38 @@ function renderResponse(entry) {
   var $pYear = document.createElement('p');
   var $pGenre = document.createElement('p');
   var $rowGenre = document.createElement('div');
+  var $pHiddenID = document.createElement('p');
+
   $resultCard.setAttribute('class', 'search-results-padding');
   $rowCard.setAttribute('class', 'row search-result-card');
   $columnPoster.setAttribute('class', 'column-card-poster');
   $imgPoster.setAttribute('class', 'poster-small');
   $imgPoster.setAttribute('src', entry.Poster);
-  $columnOneHalf.setAttribute('class', 'column-card-info white font-roboto');
+  $columnCardInfo.setAttribute('class', 'column-card-info white font-roboto');
   $rowIcon.setAttribute('class', 'row row-icon justify-right');
   $plusIcon.setAttribute('class', 'fas fa-plus-circle search-result-plus-icon');
   $h3Title.setAttribute('class', 'search-result-title');
   $pYear.setAttribute('class', 'search-result-year');
   $pGenre.setAttribute('class', 'search-result-genre');
+  $pHiddenID.setAttribute('class', 'hidden');
+
   $h3Title.textContent = entry.Title;
   $pYear.textContent = entry.Year;
   $pGenre.textContent = entry.imdbID;
+  $pHiddenID.textContent = entry.imdbID;
   $resultCard.appendChild($rowCard);
   $rowCard.appendChild($columnPoster);
   $columnPoster.appendChild($imgPoster);
-  $rowCard.appendChild($columnOneHalf);
-  $columnOneHalf.appendChild($rowIcon);
+  $rowCard.appendChild($columnCardInfo);
+  $columnCardInfo.appendChild($rowIcon);
   $rowIcon.appendChild($plusIcon);
-  $columnOneHalf.appendChild($rowTitle);
+  $columnCardInfo.appendChild($rowTitle);
   $rowTitle.appendChild($h3Title);
-  $columnOneHalf.appendChild($rowYear);
+  $columnCardInfo.appendChild($rowYear);
   $rowYear.appendChild($pYear);
-  $columnOneHalf.appendChild($rowGenre);
+  $columnCardInfo.appendChild($rowGenre);
   $rowGenre.appendChild($pGenre);
-
+  $columnCardInfo.appendChild($pHiddenID);
   return $resultCard;
 }
 
