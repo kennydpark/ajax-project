@@ -4,7 +4,7 @@ var $searchBarHome = document.querySelector('.search-bar-home');
 var $searchBarResults = document.querySelector('.search-bar-results');
 var $movieJournalNav = document.querySelector('#movie-journal-nav');
 var $allView = document.querySelectorAll('.view');
-var detailedDataArray = [];
+var responseByIDArray = [];
 var $searchMessage = document.querySelector('.search-message');
 
 $searchFormHome.addEventListener('submit', submitSearch);
@@ -16,9 +16,9 @@ function submitSearch(event) {
   var searchValue = {};
   searchValue.keyword = $searchBarHome.value;
   searchValue.searchID = data.nextSearchId;
-  data.searches.unshift(searchValue);
+  data.searchHistory.unshift(searchValue);
   data.nextSearchId++;
-  apiRequest(data.searches[0].keyword);
+  getMovieData(data.searchHistory[0].keyword);
   var $allList = document.querySelectorAll('li');
   for (var i = 0; i < $allList.length; i++) {
     $allList[i].remove();
@@ -32,10 +32,10 @@ function submitSearchResults(event) {
   var searchValue = {};
   searchValue.keyword = $searchBarResults.value;
   searchValue.searchID = data.nextSearchId;
-  data.searches.unshift(searchValue);
+  data.searchHistory.unshift(searchValue);
   data.nextSearchId++;
 
-  apiRequest(data.searches[0].keyword);
+  getMovieData(data.searchHistory[0].keyword);
   var $allList = document.querySelectorAll('li');
   for (var i = 0; i < $allList.length; i++) {
     $allList[i].remove();
@@ -43,49 +43,55 @@ function submitSearchResults(event) {
   $searchMessage.textContent = 'Showing results for ' + '\'' + $searchBarResults.value + '\'';
 }
 
-function apiRequest(search) {
+function getMovieData(search) {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'http://www.omdbapi.com/?apikey=67ac1937' + '&s=' + search);
   xhr.responseType = 'json';
-  xhr.addEventListener('load', getMovieData);
-  function getMovieData() {
-    var ulElement = document.querySelector('ul');
-    for (var i = 0; i < xhr.response.Search.length; i++) {
-      var domTree = renderSearchResults(xhr.response.Search[i]);
-      ulElement.appendChild(domTree);
-      apiRequestID(xhr.response.Search[i].imdbID);
-    }
-  }
+  xhr.addEventListener('load', function () {
+    renderMovieDOMTrees(xhr.response.Search);
+  });
   xhr.send();
+}
+
+function renderMovieDOMTrees(response) {
+  for (var i = 0; i < response.length; i++) {
+    var domTree = renderResponse(response[i]);
+    var ulElement = document.querySelector('ul');
+    ulElement.appendChild(domTree);
+    apiRequestID(response[i].imdbID);
+  }
 }
 
 function apiRequestID(imdbID) {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'http://www.omdbapi.com/?apikey=67ac1937' + '&i=' + imdbID);
   xhr.responseType = 'json';
-  xhr.addEventListener('load', getMovieID);
-  function getMovieID() {
-    var requestIDData = {};
-    requestIDData.title = xhr.response.Title;
-    requestIDData.id = xhr.response.imdbID;
-    requestIDData.genre = xhr.response.Genre;
-    detailedDataArray.push(requestIDData);
-    var $pGenre = document.querySelectorAll('.search-result-genre');
-    var $renderedPosters = document.querySelectorAll('.poster-small');
-    for (var x = 0; x < $renderedPosters.length; x++) {
-      if ($renderedPosters[x].getAttribute('src') === 'N/A') {
-        $renderedPosters[x].setAttribute('src', '../images/image-unavailable.jpg');
-      }
-    }
-    for (var i = 0; i < detailedDataArray.length; i++) {
-      for (var n = 0; n < $pGenre.length; n++) {
-        if (detailedDataArray[i].id === $pGenre[n].textContent) {
-          $pGenre[n].textContent = detailedDataArray[i].genre;
-        }
+  xhr.addEventListener('load', function () {
+    getResponseByID(xhr.response);
+  });
+  xhr.send();
+}
+
+function getResponseByID(response) {
+  var responseByIDData = {};
+  responseByIDData.title = response.Title;
+  responseByIDData.id = response.imdbID;
+  responseByIDData.genre = response.Genre;
+  responseByIDArray.push(responseByIDData);
+  var $pGenre = document.querySelectorAll('.search-result-genre');
+  var $renderedPosters = document.querySelectorAll('.poster-small');
+  for (var i = 0; i < responseByIDArray.length; i++) {
+    for (var n = 0; n < $pGenre.length; n++) {
+      if (responseByIDArray[i].id === $pGenre[n].textContent) {
+        $pGenre[n].textContent = responseByIDArray[i].genre;
       }
     }
   }
-  xhr.send();
+  for (var x = 0; x < $renderedPosters.length; x++) {
+    if ($renderedPosters[x].getAttribute('src') === 'N/A') {
+      $renderedPosters[x].setAttribute('src', '../images/image-unavailable.jpg');
+    }
+  }
 }
 
 function switchView(view) {
@@ -101,7 +107,7 @@ function switchView(view) {
   }
 }
 
-function renderSearchResults(entry) {
+function renderResponse(entry) {
   var $resultCard = document.createElement('li');
   var $rowCard = document.createElement('div');
   var $columnPoster = document.createElement('div');
@@ -117,10 +123,10 @@ function renderSearchResults(entry) {
   var $rowGenre = document.createElement('div');
   $resultCard.setAttribute('class', 'search-results-padding');
   $rowCard.setAttribute('class', 'row search-result-card');
-  $columnPoster.setAttribute('class', 'column-one-half-poster');
+  $columnPoster.setAttribute('class', 'column-card-poster');
   $imgPoster.setAttribute('class', 'poster-small');
   $imgPoster.setAttribute('src', entry.Poster);
-  $columnOneHalf.setAttribute('class', 'column-one-half white font-roboto');
+  $columnOneHalf.setAttribute('class', 'column-card-info white font-roboto');
   $rowIcon.setAttribute('class', 'row row-icon justify-right');
   $plusIcon.setAttribute('class', 'fas fa-plus-circle search-result-plus-icon');
   $h3Title.setAttribute('class', 'search-result-title');

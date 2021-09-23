@@ -172,11 +172,11 @@ ul {
   box-sizing: border-box;
 }
 
-.column-one-half {
+.column-card-info {
   width: 70%;
 }
 
-.column-one-half-poster {
+.column-card-poster {
   width: 30%;
 }
 
