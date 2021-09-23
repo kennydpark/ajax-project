@@ -1,12 +1,11 @@
-// var $form = document.querySelector('form');
 var $searchFormHome = document.querySelector('.home-form');
 var $searchFormResults = document.querySelector('.results-form');
 var $searchBarHome = document.querySelector('.search-bar-home');
 var $searchBarResults = document.querySelector('.search-bar-results');
-// var $homeView = document.querySelector('#home-content');
 var $movieJournalNav = document.querySelector('#movie-journal-nav');
 var $allView = document.querySelectorAll('.view');
 var detailedDataArray = [];
+var $searchMessage = document.querySelector('.search-message');
 
 $searchFormHome.addEventListener('submit', submitSearch);
 function submitSearch(event) {
@@ -24,6 +23,7 @@ function submitSearch(event) {
   for (var i = 0; i < $allList.length; i++) {
     $allList[i].remove();
   }
+  $searchMessage.textContent = 'Showing results for ' + '\'' + $searchBarHome.value + '\'';
 }
 
 $searchFormResults.addEventListener('submit', submitSearchResults);
@@ -86,30 +86,6 @@ function apiRequestID(imdbID) {
   }
   xhr.send();
 }
-
-// DOM TREE
-/* <li class="search-results-padding">
-  <div class="row search-result-card">
-    <div class="column-one-half-poster">
-      <img class="poster-small" src="images/avengers-poster.jpg">
-    </div>
-    <div class="column-one-half white font-roboto">
-
-      <div class="row row-icon justify-right">
-        <i class="fas fa-plus-circle search-result-plus-icon"></i>
-      </div>
-      <div class="row">
-        <h3 class="search-result-title">The Avengers The Avengers The Avengers</h3>
-      </div>
-      <div class="row">
-        <p class="search-result-year">2012</p>
-      </div>
-      <div class="row">
-        <p class="search-result-genre">Action, Adventure, Sci-Fi</p>
-      </div>
-    </div>
-  </div>
-</li> */
 
 function switchView(view) {
   for (var i = 0; i < $allView.length; i++) {

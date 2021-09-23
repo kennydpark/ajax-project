@@ -97,7 +97,7 @@ ul {
 }
 
 .search-bar-results {
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 }
 
 .search-bar-home:focus {
@@ -118,7 +118,7 @@ ul {
   background: transparent;
   border: none;
   position: relative;
-  bottom: 54px;
+  bottom: 35px;
   right: 17px;
   cursor: pointer;
 }
@@ -150,6 +150,11 @@ ul {
   opacity: 0.5;
 }
 
+.search-message {
+  margin-bottom: 25px;
+  margin-top: 0;
+}
+
 /* search results */
 
 .row-search-results {
@@ -173,8 +178,6 @@ ul {
 
 .column-one-half {
   width: 70%;
-
-  /* border: 0.5px dotted white; */
 }
 
 .column-one-half-poster {
@@ -235,4 +238,8 @@ input {
 
 .font-roboto {
   font-family: 'Roboto', sans-serif;
+}
+
+.italic {
+  font-style: italic;
 }
