@@ -49,7 +49,7 @@ ul {
   margin: auto;
 }
 
-.home-content {
+#home-content {
   position: relative;
   width: 90%;
   margin: 0 auto;
@@ -85,7 +85,8 @@ ul {
   padding-top: 40px;
 }
 
-.search-bar {
+.search-bar-home,
+.search-bar-results {
   border-radius: 25px;
   padding: 15px 25px;
   width: 100%;
@@ -94,7 +95,14 @@ ul {
   position: relative;
 }
 
-.search-bar:focus {
+.search-bar-home:focus {
+  outline: none;
+  border: none;
+  box-shadow: 0 0 0 1.5px white;
+  transition: 0.15s;
+}
+
+.search-bar-results:focus {
   outline: none;
   border: none;
   box-shadow: 0 0 0 1.5px white;
@@ -110,14 +118,6 @@ ul {
   cursor: pointer;
 }
 
-#search-icon {
-  position: relative;
-  font-size: 1rem;
-  color: white;
-  opacity: 0.5;
-  cursor: pointer;
-}
-
 .search-icon {
   position: relative;
   font-size: 1rem;
@@ -126,7 +126,7 @@ ul {
   cursor: pointer;
 }
 
-#search-icon:hover {
+.search-icon:hover {
   opacity: 1;
   transition: 0.15s;
 }
@@ -142,7 +142,7 @@ ul {
   padding-top: 20px;
 }
 
-.search-results-content {
+#search-results-content {
   position: relative;
   width: 90%;
   margin: 0 auto;
@@ -197,7 +197,7 @@ ul {
   padding-right: 15px;
 }
 
-#search-result-plus-icon {
+.search-result-plus-icon {
   font-size: 1.7rem;
 }
 
