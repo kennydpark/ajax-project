@@ -66,6 +66,7 @@ ul {
 .movie-journal-anchor {
   font-weight: bolder;
   font-size: 1.4rem;
+  cursor: pointer;
 }
 
 .my-watchlist-anchor {
@@ -95,6 +96,10 @@ ul {
   position: relative;
 }
 
+.search-bar-results {
+  margin-bottom: 20px;
+}
+
 .search-bar-home:focus {
   outline: none;
   border: none;
@@ -109,12 +114,21 @@ ul {
   transition: 0.15s;
 }
 
-.search-button {
+.search-button-results {
   background: transparent;
   border: none;
   position: relative;
-  bottom: 34px;
-  right: 15px;
+  bottom: 54px;
+  right: 17px;
+  cursor: pointer;
+}
+
+.search-button-home {
+  background: transparent;
+  border: none;
+  position: relative;
+  bottom: 35px;
+  right: 17px;
   cursor: pointer;
 }
 
@@ -199,13 +213,18 @@ ul {
 
 .search-result-plus-icon {
   font-size: 1.7rem;
+  cursor: pointer;
+}
+
+.search-result-plus-icon:active {
+  color: rgb(25, 211, 0);
 }
 
 .search-results-padding {
-  padding-bottom: 15px;
+  padding-bottom: 20px;
 }
 
-/* etc. */
+/* text styling */
 input {
   font-size: 1.1rem;
 }
