@@ -40,6 +40,7 @@ function submitSearchResults(event) {
   for (var i = 0; i < $allList.length; i++) {
     $allList[i].remove();
   }
+  $searchMessage.textContent = 'Showing results for ' + '\'' + $searchBarResults.value + '\'';
 }
 
 function apiRequest(search) {
