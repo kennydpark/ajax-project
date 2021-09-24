@@ -227,7 +227,6 @@ function renderDetailed(entry) {
   $plusIconBig.setAttribute('class', 'fas fa-plus-circle plus-icon-big white');
   $columnAddCaption.setAttribute('class', 'column-add-caption text-center');
   $addCaption.setAttribute('class', 'add-caption');
-
   $spanDirector.setAttribute('class', 'bold');
   $spanCast.setAttribute('class', 'bold');
 
