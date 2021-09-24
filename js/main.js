@@ -193,6 +193,7 @@ function renderDetailed(entry) {
   var $addCaption = document.createElement('h1');
   var $spanDirector = document.createElement('span');
   var $spanCast = document.createElement('span');
+  var $pHiddenID = document.createElement('p');
 
   $detailedCard.setAttribute('class', 'detailed-card font-roboto');
   $rowCardPoster.setAttribute('class', 'row row-card-poster');
@@ -229,6 +230,10 @@ function renderDetailed(entry) {
 
   $spanDirector.setAttribute('class', 'bold');
   $spanCast.setAttribute('class', 'bold');
+
+  $pHiddenID.setAttribute('class', 'detailed-id hidden');
+  $pHiddenID.textContent = entry.imdbID;
+  $containerCardInfo.appendChild($pHiddenID);
 
   $detailedTitle.textContent = entry.Title;
   $detailedYear.textContent = entry.Year;
@@ -313,23 +318,44 @@ function goBack(event) {
 
 // var $rowCardAdd = document.querySelector('.row-card-add');
 // var $searchResultsContent = document.querySelector('#search-results-content');
-function viewWatchlistCaption() {
+function viewWatchlistCaptionUpdate() {
   var $addToWatchlist = document.querySelector('.add-caption');
   $addToWatchlist.textContent = 'View Watchlist';
 }
-
-// setTimeout(viewWatchlistCaption, 1000);
 
 function createEventListener() {
   var $plusButtonBig = document.querySelector('.plus-button-big');
   var $plusIconBig = document.querySelector('.plus-icon-big');
   var $addToWatchlist = document.querySelector('.add-caption');
+  var $posterElement = document.querySelector('.poster-big');
+  var $titleElement = document.querySelector('.detailed-title');
+  var $yearElement = document.querySelector('.detailed-year');
+  var $genreElement = document.querySelector('.detailed-genre');
+  var $directorElement = document.querySelector('.detailed-director');
+  var $castElement = document.querySelector('.detailed-cast');
+  var $plotElement = document.querySelector('.detailed-plot');
+  var $idElement = document.querySelector('.detailed-id');
   window.addEventListener('click', function (event) {
     if ((event.target === $plusButtonBig) || (event.target === $plusIconBig) || (event.target === $addToWatchlist)) {
       if ($addToWatchlist.textContent === 'Add to Watchlist') {
         $plusIconBig.className = 'fas fa-check-circle plus-icon-big green';
         $addToWatchlist.textContent = 'Added!';
-        setTimeout(viewWatchlistCaption, 1000);
+        setTimeout(viewWatchlistCaptionUpdate, 1000);
+        var cardDataForWatchlist = {};
+        // console.log(event.target.closest('.detailed-card'));
+        // console.log(event.target.closest('.poster-big'));
+
+        // var posterElement = event.target.closest('.poster-big');
+        cardDataForWatchlist.posterURL = $posterElement.getAttribute('src');
+        cardDataForWatchlist.title = $titleElement.textContent;
+        cardDataForWatchlist.year = $yearElement.textContent;
+        cardDataForWatchlist.genre = $genreElement.textContent;
+        cardDataForWatchlist.director = $directorElement.textContent;
+        cardDataForWatchlist.cast = $castElement.textContent;
+        cardDataForWatchlist.plot = $plotElement.textContent;
+        cardDataForWatchlist.id = $idElement.textContent;
+
+        data.savedCards.unshift(cardDataForWatchlist);
       }
     }
   });
