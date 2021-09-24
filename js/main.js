@@ -199,6 +199,9 @@ function renderDetailed(entry) {
   $rowCardPoster.setAttribute('class', 'row row-card-poster');
   $imgPosterBig.setAttribute('class', 'poster-big');
   $imgPosterBig.setAttribute('src', entry.Poster);
+  if (entry.Poster === 'N/A') {
+    $imgPosterBig.setAttribute('src', '../images/image-unavailable.jpg');
+  }
   $containerCardInfo.setAttribute('class', 'container-card-info');
   $rowCardTitle.setAttribute('class', 'row row-card-title white');
   $columnTitleDetailed.setAttribute('class', 'column-title-detailed');
