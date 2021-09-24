@@ -191,7 +191,6 @@ function renderDetailed(entry) {
   var $plusIconBig = document.createElement('i');
   var $columnAddCaption = document.createElement('div');
   var $addCaption = document.createElement('h1');
-
   var $spanDirector = document.createElement('span');
   var $spanCast = document.createElement('span');
 
@@ -275,17 +274,6 @@ function renderDetailed(entry) {
   return $detailedCard;
 }
 
-$movieJournalNav.addEventListener('click', goHome);
-function goHome(event) {
-  switchView('search-home');
-  $searchFormHome.reset();
-}
-
-$backButton.addEventListener('click', goBack);
-function goBack(event) {
-  switchView('search-results');
-}
-
 $ulElement.addEventListener('click', selectCard);
 function selectCard(event) {
   var $allDetailedCards = document.querySelectorAll('.detailed-card');
@@ -309,4 +297,15 @@ function apiRequestIDDetailed(imdbID) {
 
 function getResponseForDetailed(response) {
   $searchResultDetailed.appendChild(renderDetailed(response));
+}
+
+$movieJournalNav.addEventListener('click', goHome);
+function goHome(event) {
+  switchView('search-home');
+  $searchFormHome.reset();
+}
+
+$backButton.addEventListener('click', goBack);
+function goBack(event) {
+  switchView('search-results');
 }
