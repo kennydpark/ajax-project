@@ -316,8 +316,6 @@ function goBack(event) {
   switchView('search-results');
 }
 
-// var $rowCardAdd = document.querySelector('.row-card-add');
-// var $searchResultsContent = document.querySelector('#search-results-content');
 function viewWatchlistCaptionUpdate() {
   var $addToWatchlist = document.querySelector('.add-caption');
   $addToWatchlist.textContent = 'View Watchlist';
@@ -342,10 +340,6 @@ function createEventListener() {
         $addToWatchlist.textContent = 'Added!';
         setTimeout(viewWatchlistCaptionUpdate, 1000);
         var cardDataForWatchlist = {};
-        // console.log(event.target.closest('.detailed-card'));
-        // console.log(event.target.closest('.poster-big'));
-
-        // var posterElement = event.target.closest('.poster-big');
         cardDataForWatchlist.posterURL = $posterElement.getAttribute('src');
         cardDataForWatchlist.title = $titleElement.textContent;
         cardDataForWatchlist.year = $yearElement.textContent;
@@ -360,13 +354,3 @@ function createEventListener() {
     }
   });
 }
-
-// window.addEventListener('click', buttonGreen);
-// function buttonGreen(event) {
-//   console.log(event.target);
-// if ((event.target === $plusButtonBig) || (event.target === $plusIconBig) || (event.target === $addToWatchlist)) {
-//   $plusIconBig.className = 'fas fa-check-circle plus-icon-big green';
-//   $addToWatchlist.textContent = 'Added to Watchlist!';
-//   console.log('clicked');
-//   }
-// }
