@@ -6,6 +6,9 @@ var $movieJournalNav = document.querySelector('#movie-journal-nav');
 var $allView = document.querySelectorAll('.view');
 var responseByIDArray = [];
 var $searchMessage = document.querySelector('.search-message');
+var $backButton = document.querySelector('.back-button');
+var $searchResultDetailed = document.querySelector('#search-result-detailed');
+var $ulElement = document.querySelector('ul');
 
 $searchFormHome.addEventListener('submit', submitSearch);
 function submitSearch(event) {
@@ -105,6 +108,9 @@ function switchView(view) {
   if (view === 'search-home') {
     $movieJournalNav.setAttribute('class', 'movie-journal-anchor white font-roboto hidden');
   }
+  if (view === 'search-result-detailed') {
+    $movieJournalNav.setAttribute('class', 'movie-journal-anchor white font-roboto');
+  }
 }
 
 function renderResponse(entry) {
@@ -112,7 +118,7 @@ function renderResponse(entry) {
   var $rowCard = document.createElement('div');
   var $columnPoster = document.createElement('div');
   var $imgPoster = document.createElement('img');
-  var $columnOneHalf = document.createElement('div');
+  var $columnCardInfo = document.createElement('div');
   var $rowIcon = document.createElement('div');
   var $plusIcon = document.createElement('i');
   var $rowTitle = document.createElement('div');
@@ -121,38 +127,185 @@ function renderResponse(entry) {
   var $pYear = document.createElement('p');
   var $pGenre = document.createElement('p');
   var $rowGenre = document.createElement('div');
+  var $pHiddenID = document.createElement('p');
+
   $resultCard.setAttribute('class', 'search-results-padding');
+  $resultCard.setAttribute('imdbid', entry.imdbID);
   $rowCard.setAttribute('class', 'row search-result-card');
   $columnPoster.setAttribute('class', 'column-card-poster');
   $imgPoster.setAttribute('class', 'poster-small');
   $imgPoster.setAttribute('src', entry.Poster);
-  $columnOneHalf.setAttribute('class', 'column-card-info white font-roboto');
+  $columnCardInfo.setAttribute('class', 'column-card-info white font-roboto');
   $rowIcon.setAttribute('class', 'row row-icon justify-right');
   $plusIcon.setAttribute('class', 'fas fa-plus-circle search-result-plus-icon');
   $h3Title.setAttribute('class', 'search-result-title');
   $pYear.setAttribute('class', 'search-result-year');
   $pGenre.setAttribute('class', 'search-result-genre');
+  $pHiddenID.setAttribute('class', 'hidden');
+
   $h3Title.textContent = entry.Title;
   $pYear.textContent = entry.Year;
   $pGenre.textContent = entry.imdbID;
+  $pHiddenID.textContent = entry.imdbID;
+
   $resultCard.appendChild($rowCard);
   $rowCard.appendChild($columnPoster);
   $columnPoster.appendChild($imgPoster);
-  $rowCard.appendChild($columnOneHalf);
-  $columnOneHalf.appendChild($rowIcon);
+  $rowCard.appendChild($columnCardInfo);
+  $columnCardInfo.appendChild($rowIcon);
   $rowIcon.appendChild($plusIcon);
-  $columnOneHalf.appendChild($rowTitle);
+  $columnCardInfo.appendChild($rowTitle);
   $rowTitle.appendChild($h3Title);
-  $columnOneHalf.appendChild($rowYear);
+  $columnCardInfo.appendChild($rowYear);
   $rowYear.appendChild($pYear);
-  $columnOneHalf.appendChild($rowGenre);
+  $columnCardInfo.appendChild($rowGenre);
   $rowGenre.appendChild($pGenre);
-
+  $columnCardInfo.appendChild($pHiddenID);
   return $resultCard;
+}
+
+function renderDetailed(entry) {
+  var $detailedCard = document.createElement('div');
+  var $rowCardPoster = document.createElement('div');
+  var $imgPosterBig = document.createElement('img');
+  var $containerCardInfo = document.createElement('div');
+  var $rowCardTitle = document.createElement('div');
+  var $columnTitleDetailed = document.createElement('div');
+  var $detailedTitle = document.createElement('h2');
+  var $columnYearDetailed = document.createElement('div');
+  var $detailedYear = document.createElement('p');
+  var $row = document.createElement('div');
+  var $columnHalfInfo = document.createElement('div');
+  var $rowCardGenre = document.createElement('div');
+  var $detailedGenre = document.createElement('p');
+  var $rowCardDirector = document.createElement('div');
+  var $detailedDirector = document.createElement('p');
+  var $rowCardCast = document.createElement('div');
+  var $detailedCast = document.createElement('p');
+  var $columnHalfPlot = document.createElement('div');
+  var $rowCardPlot = document.createElement('div');
+  var $detailedPlot = document.createElement('p');
+  var $rowCardAdd = document.createElement('div');
+  var $columnBigPlus = document.createElement('div');
+  var $plusButtonBig = document.createElement('button');
+  var $plusIconBig = document.createElement('i');
+  var $columnAddCaption = document.createElement('div');
+  var $addCaption = document.createElement('h1');
+  var $spanDirector = document.createElement('span');
+  var $spanCast = document.createElement('span');
+
+  $detailedCard.setAttribute('class', 'detailed-card font-roboto');
+  $rowCardPoster.setAttribute('class', 'row row-card-poster');
+  $imgPosterBig.setAttribute('class', 'poster-big');
+  $imgPosterBig.setAttribute('src', entry.Poster);
+  if (entry.Poster === 'N/A') {
+    $imgPosterBig.setAttribute('src', '../images/image-unavailable.jpg');
+  }
+  $containerCardInfo.setAttribute('class', 'container-card-info');
+  $rowCardTitle.setAttribute('class', 'row row-card-title white');
+  $columnTitleDetailed.setAttribute('class', 'column-title-detailed');
+  $detailedTitle.setAttribute('class', 'detailed-title');
+  $columnYearDetailed.setAttribute('class', 'column-year-detailed');
+  $detailedYear.setAttribute('class', 'detailed-year');
+  $row.setAttribute('class', 'row');
+  $columnHalfInfo.setAttribute('class', 'column-half');
+  $rowCardGenre.setAttribute('class', 'row row-card-genre white');
+  $detailedGenre.setAttribute('class', 'detailed-genre');
+  $rowCardDirector.setAttribute('class', 'row row-card-director white');
+  $detailedDirector.setAttribute('class', 'detailed-director');
+  $rowCardCast.setAttribute('class', 'row row-card-cast white');
+  $detailedCast.setAttribute('class', 'detailed-cast');
+  $columnHalfPlot.setAttribute('class', 'column-half');
+  $rowCardPlot.setAttribute('class', 'row row-card-plot white');
+  $detailedPlot.setAttribute('class', 'detailed-plot');
+  $rowCardAdd.setAttribute('class', 'row row-card-add white');
+  $columnBigPlus.setAttribute('class', 'column-big-plus');
+  $plusButtonBig.setAttribute('class', 'plus-button-big');
+  $plusButtonBig.setAttribute('type', 'button');
+  $plusIconBig.setAttribute('type', 'button');
+  $plusIconBig.setAttribute('class', 'fas fa-plus-circle plus-icon-big white');
+  $columnAddCaption.setAttribute('class', 'column-add-caption text-center');
+  $addCaption.setAttribute('class', 'add-caption');
+
+  $spanDirector.setAttribute('class', 'bold');
+  $spanCast.setAttribute('class', 'bold');
+
+  $detailedTitle.textContent = entry.Title;
+  $detailedYear.textContent = entry.Year;
+  $detailedGenre.textContent = entry.Genre;
+
+  $spanDirector.textContent = entry.Director;
+  $detailedDirector.textContent = 'Director: ';
+  $detailedDirector.append($spanDirector);
+
+  $spanCast.textContent = entry.Actors;
+  $detailedCast.textContent = 'Cast: ';
+  $detailedCast.append($spanCast);
+
+  $detailedPlot.textContent = entry.Plot;
+  $addCaption.textContent = 'Add to Watchlist';
+
+  $detailedCard.appendChild($rowCardPoster);
+  $rowCardPoster.appendChild($imgPosterBig);
+  $detailedCard.appendChild($containerCardInfo);
+  $containerCardInfo.appendChild($rowCardTitle);
+  $rowCardTitle.appendChild($columnTitleDetailed);
+  $columnTitleDetailed.appendChild($detailedTitle);
+  $rowCardTitle.appendChild($columnYearDetailed);
+  $columnYearDetailed.appendChild($detailedYear);
+  $containerCardInfo.appendChild($row);
+  $row.appendChild($columnHalfInfo);
+  $columnHalfInfo.appendChild($rowCardGenre);
+  $rowCardGenre.appendChild($detailedGenre);
+  $columnHalfInfo.appendChild($rowCardDirector);
+  $rowCardDirector.appendChild($detailedDirector);
+  $columnHalfInfo.appendChild($rowCardCast);
+  $rowCardCast.appendChild($detailedCast);
+  $row.appendChild($columnHalfPlot);
+  $columnHalfPlot.appendChild($rowCardPlot);
+  $rowCardPlot.appendChild($detailedPlot);
+  $containerCardInfo.appendChild($rowCardAdd);
+  $rowCardAdd.appendChild($columnBigPlus);
+  $columnBigPlus.appendChild($plusButtonBig);
+  $plusButtonBig.appendChild($plusIconBig);
+  $rowCardAdd.appendChild($columnAddCaption);
+  $columnAddCaption.appendChild($addCaption);
+
+  return $detailedCard;
+}
+
+$ulElement.addEventListener('click', selectCard);
+function selectCard(event) {
+  var $allDetailedCards = document.querySelectorAll('.detailed-card');
+  for (var i = 0; i < $allDetailedCards.length; i++) {
+    $allDetailedCards[i].remove();
+  }
+  var imdbID = event.target.closest('li').getAttribute('imdbid');
+  apiRequestIDDetailed(imdbID);
+  switchView('search-result-detailed');
+}
+
+function apiRequestIDDetailed(imdbID) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'http://www.omdbapi.com/?apikey=67ac1937' + '&i=' + imdbID);
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    getResponseForDetailed(xhr.response);
+  });
+  xhr.send();
+}
+
+function getResponseForDetailed(response) {
+  $searchResultDetailed.appendChild(renderDetailed(response));
 }
 
 $movieJournalNav.addEventListener('click', goHome);
 function goHome(event) {
   switchView('search-home');
   $searchFormHome.reset();
+}
+
+$backButton.addEventListener('click', goBack);
+function goBack(event) {
+  switchView('search-results');
 }
