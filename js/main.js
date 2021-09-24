@@ -7,12 +7,14 @@ var $allView = document.querySelectorAll('.view');
 var responseByIDArray = [];
 var $searchMessage = document.querySelector('.search-message');
 var $backButton = document.querySelector('.back-button');
-var $rowCardAdd = document.querySelector('.row-card-add');
-var $plusButtonBig = document.querySelector('.plus-button-big');
-var $plusIconBig = document.querySelector('.plus-icon-big');
-var $addToWatchlist = document.querySelector('.add-caption');
-var $searchResultsContent = document.querySelector('#search-results-content');
+// var $rowCardAdd = document.querySelector('.row-card-add');
+// var $plusButtonBig = document.querySelector('.plus-button-big');
+// var $plusIconBig = document.querySelector('.plus-icon-big');
+// var $addToWatchlist = document.querySelector('.add-caption');
+// var $searchResultsContent = document.querySelector('#search-results-content');
 var $searchResultDetailed = document.querySelector('#search-result-detailed');
+var $ulElement = document.querySelector('ul');
+// var $AllDetailedCards = document.querySelectorAll('.detailed-card');
 
 $searchFormHome.addEventListener('submit', submitSearch);
 function submitSearch(event) {
@@ -114,7 +116,6 @@ function switchView(view) {
   }
   if (view === 'search-result-detailed') {
     $movieJournalNav.setAttribute('class', 'movie-journal-anchor white font-roboto');
-
   }
 }
 
@@ -240,6 +241,9 @@ function renderDetailed(entry) {
   var $columnAddCaption = document.createElement('div');
   var $addCaption = document.createElement('h1');
 
+  var $spanDirector = document.createElement('span');
+  var $spanCast = document.createElement('span');
+
   $detailedCard.setAttribute('class', 'detailed-card font-roboto');
   $rowCardPoster.setAttribute('class', 'row row-card-poster');
   $imgPosterBig.setAttribute('class', 'poster-big');
@@ -270,11 +274,21 @@ function renderDetailed(entry) {
   $columnAddCaption.setAttribute('class', 'column-add-caption text-center');
   $addCaption.setAttribute('class', 'add-caption');
 
+  $spanDirector.setAttribute('class', 'bold');
+  $spanCast.setAttribute('class', 'bold');
+
   $detailedTitle.textContent = entry.Title;
   $detailedYear.textContent = entry.Year;
   $detailedGenre.textContent = entry.Genre;
-  $detailedDirector.textContent = entry.Director;
-  $detailedCast.textContent = entry.Actors;
+
+  $spanDirector.textContent = entry.Director;
+  $detailedDirector.textContent = 'Director: ';
+  $detailedDirector.append($spanDirector);
+
+  $spanCast.textContent = entry.Actors;
+  $detailedCast.textContent = 'Cast: ';
+  $detailedCast.append($spanCast);
+
   $detailedPlot.textContent = entry.Plot;
   $addCaption.textContent = 'Add to Watchlist';
 
@@ -318,16 +332,21 @@ function goBack(event) {
   switchView('search-results');
 }
 
-$rowCardAdd.addEventListener('click', buttonGreen);
-function buttonGreen(event) {
-  if ((event.target === $plusButtonBig) || (event.target === $plusIconBig) || (event.target === $addToWatchlist)) {
-    $plusIconBig.className = 'fas fa-check-circle plus-icon-big green';
-    $addToWatchlist.textContent = 'Added to Watchlist!';
-  }
-}
+// $rowCardAdd.addEventListener('click', buttonGreen);
+// function buttonGreen(event) {
+//   if ((event.target === $plusButtonBig) || (event.target === $plusIconBig) || (event.target === $addToWatchlist)) {
+//     $plusIconBig.className = 'fas fa-check-circle plus-icon-big green';
+//     $addToWatchlist.textContent = 'Added to Watchlist!';
+//   }
+// }
 
-$searchResultsContent.addEventListener('click', selectCard);
+$ulElement.addEventListener('click', selectCard);
 function selectCard(event) {
+  var $allDetailedCards = document.querySelectorAll('.detailed-card');
+  for (var i = 0; i < $allDetailedCards.length; i++) {
+    $allDetailedCards[i].remove();
+  }
+  // console.log(event.target);
   var imdbID = event.target.closest('li').getAttribute('imdbid');
   // console.log(event.target.closest('li').getAttribute('imdbid'));
   apiRequestIDDetailed(imdbID);
@@ -373,3 +392,11 @@ function getResponseForDetailed(response) {
 // Year: "2006"
 // imdbID: "tt0416449"
 // imdbRating: "7.6"
+
+// $rowCardAdd.addEventListener('click', buttonGreen);
+// function buttonGreen(event) {
+//   if ((event.target === $plusButtonBig) || (event.target === $plusIconBig) || (event.target === $addToWatchlist)) {
+//     $plusIconBig.className = 'fas fa-check-circle plus-icon-big green';
+//     $addToWatchlist.textContent = 'Added to Watchlist!';
+//   }
+// }
