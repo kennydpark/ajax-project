@@ -7,14 +7,8 @@ var $allView = document.querySelectorAll('.view');
 var responseByIDArray = [];
 var $searchMessage = document.querySelector('.search-message');
 var $backButton = document.querySelector('.back-button');
-// var $rowCardAdd = document.querySelector('.row-card-add');
-// var $plusButtonBig = document.querySelector('.plus-button-big');
-// var $plusIconBig = document.querySelector('.plus-icon-big');
-// var $addToWatchlist = document.querySelector('.add-caption');
-// var $searchResultsContent = document.querySelector('#search-results-content');
 var $searchResultDetailed = document.querySelector('#search-result-detailed');
 var $ulElement = document.querySelector('ul');
-// var $AllDetailedCards = document.querySelectorAll('.detailed-card');
 
 $searchFormHome.addEventListener('submit', submitSearch);
 function submitSearch(event) {
@@ -170,49 +164,6 @@ function renderResponse(entry) {
   return $resultCard;
 }
 
-/* <div class="detailed-card font-roboto">
-      <div class="row row-card-poster">
-          <img class="poster-big" src="images/avengers-poster.jpg">
-      </div>
-      <div class="container-card-info">
-          <div class="row row-card-title white">
-              <div class="column-title-detailed">
-                  <h2 class="detailed-title">The Avengers</h2>
-              </div>
-              <div class="column-year-detailed">
-                  <p class="detailed-year">2012</p>
-              </div>
-          </div>
-          <div class="row">
-              <div class="column-half">
-                  <div class="row row-card-genre white">
-                      <p class="detailed-genre">Action, Adventure, Sci-Fi</p>
-                  </div>
-                  <div class="row row-card-director white">
-                      <p class="detailed-director">Director: <span class="bold">Joss Whedon</span></p>
-                  </div>
-                  <div class="row row-card-cast white">
-                      <p class="detailed-cast">Cast: <span class="bold">Robert Downey Jr., Chris Evans, Scarlett Johansson</span></p>
-                  </div>
-              </div>
-              <div class="column-half">
-                  <div class="row row-card-plot white">
-                      <p class="detailed-plot">Earth's mightiest heroes must come together and learn to fight as a team if they are going to stop the mischievous Loki and his alien army from enslaving humanity.
-                      </p>
-                  </div>
-              </div>
-          </div>
-          <div class="row row-card-add white">
-              <div class="column-big-plus">
-                  <button class="plus-button-big" type="button"><i type="button" class="fas fa-plus-circle plus-icon-big white"></i></button>
-              </div>
-              <div class="column-add-caption text-center">
-                  <h1 class="add-caption">Add to Watchlist</h1>
-              </div>
-          </div>
-      </div>
-  </div> */
-
 function renderDetailed(entry) {
   var $detailedCard = document.createElement('div');
   var $rowCardPoster = document.createElement('div');
@@ -332,23 +283,13 @@ function goBack(event) {
   switchView('search-results');
 }
 
-// $rowCardAdd.addEventListener('click', buttonGreen);
-// function buttonGreen(event) {
-//   if ((event.target === $plusButtonBig) || (event.target === $plusIconBig) || (event.target === $addToWatchlist)) {
-//     $plusIconBig.className = 'fas fa-check-circle plus-icon-big green';
-//     $addToWatchlist.textContent = 'Added to Watchlist!';
-//   }
-// }
-
 $ulElement.addEventListener('click', selectCard);
 function selectCard(event) {
   var $allDetailedCards = document.querySelectorAll('.detailed-card');
   for (var i = 0; i < $allDetailedCards.length; i++) {
     $allDetailedCards[i].remove();
   }
-  // console.log(event.target);
   var imdbID = event.target.closest('li').getAttribute('imdbid');
-  // console.log(event.target.closest('li').getAttribute('imdbid'));
   apiRequestIDDetailed(imdbID);
   switchView('search-result-detailed');
 }
@@ -364,39 +305,5 @@ function apiRequestIDDetailed(imdbID) {
 }
 
 function getResponseForDetailed(response) {
-  // console.log(response);
   $searchResultDetailed.appendChild(renderDetailed(response));
 }
-
-// Actors: "Gerard Butler, Lena Headey, David Wenham"
-// Awards: "19 wins & 55 nominations"
-// BoxOffice: "$210,614,939"
-// Country: "United States, Canada, Bulgaria, Australia"
-// DVD: "31 Jul 2007"
-// Director: "Zack Snyder"
-// Genre: "Action, Drama"
-// Language: "English"
-// Metascore: "52"
-// Plot: "King Leonidas of Sparta and a force of 300 men fight the Persians at Thermopylae in 480 B.C."
-// Poster: "https://m.media-amazon.com/images/M/MV5BNWMxYTZlOTUtZDExMi00YzZmLTkwYTMtZmM2MmRjZmQ3OGY4XkEyXkFqcGdeQXVyMTAwMzUyMzUy._V1_SX300.jpg"
-// Production: "Atmosphere Entertainment MM LLC, Legendary Pictures, Virtual Studios, Warner Bros."
-// Rated: "R"
-// Ratings: (3)[{… }, {… }, {… }]
-// Released: "09 Mar 2007"
-// Response: "True"
-// Runtime: "117 min"
-// Title: "300"
-// Type: "movie"
-// Website: "N/A"
-// Writer: "Zack Snyder, Kurt Johnstad, Michael B. Gordon"
-// Year: "2006"
-// imdbID: "tt0416449"
-// imdbRating: "7.6"
-
-// $rowCardAdd.addEventListener('click', buttonGreen);
-// function buttonGreen(event) {
-//   if ((event.target === $plusButtonBig) || (event.target === $plusIconBig) || (event.target === $addToWatchlist)) {
-//     $plusIconBig.className = 'fas fa-check-circle plus-icon-big green';
-//     $addToWatchlist.textContent = 'Added to Watchlist!';
-//   }
-// }
