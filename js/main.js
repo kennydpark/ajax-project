@@ -11,7 +11,6 @@ var $rowCardAdd = document.querySelector('.row-card-add');
 var $plusButtonBig = document.querySelector('.plus-button-big');
 var $plusIconBig = document.querySelector('.plus-icon-big');
 var $addToWatchlist = document.querySelector('.add-caption');
-// var $columnCardInfo = document.querySelector('.column-card-info');
 var $searchResultsContent = document.querySelector('#search-results-content');
 var $searchResultDetailed = document.querySelector('#search-result-detailed');
 
