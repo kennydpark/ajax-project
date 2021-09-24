@@ -297,6 +297,7 @@ function apiRequestIDDetailed(imdbID) {
 
 function getResponseForDetailed(response) {
   $searchResultDetailed.appendChild(renderDetailed(response));
+  createEventListener();
 }
 
 $movieJournalNav.addEventListener('click', goHome);
@@ -309,3 +310,37 @@ $backButton.addEventListener('click', goBack);
 function goBack(event) {
   switchView('search-results');
 }
+
+// var $rowCardAdd = document.querySelector('.row-card-add');
+// var $searchResultsContent = document.querySelector('#search-results-content');
+function viewWatchlistCaption() {
+  var $addToWatchlist = document.querySelector('.add-caption');
+  $addToWatchlist.textContent = 'View Watchlist';
+}
+
+// setTimeout(viewWatchlistCaption, 1000);
+
+function createEventListener() {
+  var $plusButtonBig = document.querySelector('.plus-button-big');
+  var $plusIconBig = document.querySelector('.plus-icon-big');
+  var $addToWatchlist = document.querySelector('.add-caption');
+  window.addEventListener('click', function (event) {
+    if ((event.target === $plusButtonBig) || (event.target === $plusIconBig) || (event.target === $addToWatchlist)) {
+      if ($addToWatchlist.textContent === 'Add to Watchlist') {
+        $plusIconBig.className = 'fas fa-check-circle plus-icon-big green';
+        $addToWatchlist.textContent = 'Added!';
+        setTimeout(viewWatchlistCaption, 1000);
+      }
+    }
+  });
+}
+
+// window.addEventListener('click', buttonGreen);
+// function buttonGreen(event) {
+//   console.log(event.target);
+// if ((event.target === $plusButtonBig) || (event.target === $plusIconBig) || (event.target === $addToWatchlist)) {
+//   $plusIconBig.className = 'fas fa-check-circle plus-icon-big green';
+//   $addToWatchlist.textContent = 'Added to Watchlist!';
+//   console.log('clicked');
+//   }
+// }
