@@ -13,6 +13,7 @@ var $backButtonWatchlist = document.querySelector('.back-button-watchlist');
 var $searchResultDetailed = document.querySelector('#search-result-detailed');
 var $ulElement = document.querySelector('ul');
 var $ulWatchlist = document.querySelector('.ul-watchlist');
+var $colNav = document.querySelector('.col-nav');
 
 $searchFormHome.addEventListener('submit', submitSearch);
 function submitSearch(event) {
@@ -112,21 +113,18 @@ function switchView(view) {
   }
   if (view === 'search-home') {
     $movieJournalNav.className = 'movie-journal-anchor white font-roboto hidden';
-    $myWatchlistNav.className = 'my-watch-list-anchor white font-roboto';
-    $bookmarkIconNav.className = 'far fa-bookmark';
+    $colNav.className = 'col-nav justify-right';
   }
   if (view === 'search-results') {
-    $myWatchlistNav.className = 'my-watch-list-anchor white font-roboto';
-    $bookmarkIconNav.className = 'far fa-bookmark';
+    $colNav.className = 'col-nav justify-right';
   }
   if (view === 'search-result-detailed') {
     $movieJournalNav.className = 'movie-journal-anchor white font-roboto';
-    $bookmarkIconNav.className = 'far fa-bookmark';
+    $colNav.className = 'col-nav justify-right';
   }
   if (view === 'watchlist') {
     $movieJournalNav.className = 'movie-journal-anchor white font-roboto';
-    $myWatchlistNav.className = 'my-watch-list-anchor white font-roboto hidden';
-    $bookmarkIconNav.className = 'far fa-bookmark hidden';
+    $colNav.className = 'col-nav justify-right hidden';
   }
 }
 
@@ -427,4 +425,13 @@ function addToSavedInData(event) {
       $backButtonWatchlist.className = 'back-button-watchlist';
     }
   }
+}
+
+document.addEventListener('DOMContentLoaded', loadedPage);
+function loadedPage(event) {
+  for (var i = 0; i < data.savedCards.length; i++) {
+    var watchlistDomTree = renderWatchlist(data.savedCards[i]);
+    $ulWatchlist.appendChild(watchlistDomTree);
+  }
+  switchView(data.view);
 }
