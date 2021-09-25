@@ -110,15 +110,19 @@ function switchView(view) {
     }
   }
   if (view === 'search-home') {
-    $movieJournalNav.setAttribute('class', 'movie-journal-anchor white font-roboto hidden');
+    $movieJournalNav.className = 'movie-journal-anchor white font-roboto hidden';
+    $myWatchlistNav.className = 'my-watch-list-anchor white font-roboto';
+  }
+  if (view === 'search-results') {
+    $myWatchlistNav.className = 'my-watch-list-anchor white font-roboto';
   }
   if (view === 'search-result-detailed') {
-    $movieJournalNav.setAttribute('class', 'movie-journal-anchor white font-roboto');
+    $movieJournalNav.className = 'movie-journal-anchor white font-roboto';
   }
   if (view === 'watchlist') {
-    $movieJournalNav.setAttribute('class', 'movie-journal-anchor white font-roboto');
-    $myWatchlistNav.setAttribute('class', 'my-watch-list-anchor white font-roboto hidden');
-    $bookmarkIconNav.setAttribute('class', 'far fa-bookmark hidden');
+    $movieJournalNav.className = 'movie-journal-anchor white font-roboto';
+    $myWatchlistNav.className = 'my-watch-list-anchor white font-roboto hidden';
+    $bookmarkIconNav.className = 'far fa-bookmark hidden';
   }
 }
 
@@ -315,6 +319,12 @@ function goHome(event) {
   $searchFormHome.reset();
 }
 
+$myWatchlistNav.addEventListener('click', goWatchlist);
+function goWatchlist(event) {
+  switchView('watchlist');
+  $backButtonWatchlist.className = 'back-button-watchlist hidden';
+}
+
 $backButtonDetailed.addEventListener('click', goBack);
 $backButtonWatchlist.addEventListener('click', goBack);
 function goBack(event) {
@@ -358,6 +368,7 @@ function addToSavedInData(event) {
       data.savedCards.unshift(cardDataForWatchlist);
     } else if ($addToWatchlist.textContent === 'View Watchlist') {
       switchView('watchlist');
+      $backButtonWatchlist.className = 'back-button-watchlist';
     }
   }
 }
