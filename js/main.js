@@ -120,7 +120,6 @@ function renderResponse(entry) {
   var $imgPoster = document.createElement('img');
   var $columnCardInfo = document.createElement('div');
   var $rowIcon = document.createElement('div');
-  // var $plusIcon = document.createElement('i');
   var $rowTitle = document.createElement('div');
   var $h3Title = document.createElement('h3');
   var $rowYear = document.createElement('div');
@@ -137,7 +136,6 @@ function renderResponse(entry) {
   $imgPoster.setAttribute('src', entry.Poster);
   $columnCardInfo.setAttribute('class', 'column-card-info white font-roboto');
   $rowIcon.setAttribute('class', 'row row-icon justify-right');
-  // $plusIcon.setAttribute('class', 'fas fa-plus-circle search-result-plus-icon');
   $h3Title.setAttribute('class', 'search-result-title');
   $pYear.setAttribute('class', 'search-result-year');
   $pGenre.setAttribute('class', 'search-result-genre');
@@ -153,7 +151,6 @@ function renderResponse(entry) {
   $columnPoster.appendChild($imgPoster);
   $rowCard.appendChild($columnCardInfo);
   $columnCardInfo.appendChild($rowIcon);
-  // $rowIcon.appendChild($plusIcon);
   $columnCardInfo.appendChild($rowTitle);
   $rowTitle.appendChild($h3Title);
   $columnCardInfo.appendChild($rowYear);
