@@ -12,6 +12,7 @@ var $backButtonDetailed = document.querySelector('.back-button');
 var $backButtonWatchlist = document.querySelector('.back-button-watchlist');
 var $searchResultDetailed = document.querySelector('#search-result-detailed');
 var $ulElement = document.querySelector('ul');
+var $ulWatchlist = document.querySelector('.ul-watchlist');
 
 $searchFormHome.addEventListener('submit', submitSearch);
 function submitSearch(event) {
@@ -291,6 +292,56 @@ function renderDetailed(entry) {
   return $detailedCard;
 }
 
+function renderWatchlist(entry) {
+  var $watchlistCard = document.createElement('li');
+  var $rowWatchlistCard = document.createElement('div');
+  var $columnCardPoster = document.createElement('div');
+  var $imgPosterSmall = document.createElement('img');
+  var $columnCardInfo = document.createElement('div');
+  var $rowIcon = document.createElement('div');
+  var $rowTitle = document.createElement('div');
+  var $h3Title = document.createElement('h3');
+  var $rowYear = document.createElement('div');
+  var $pYear = document.createElement('p');
+  var $rowGenre = document.createElement('div');
+  var $pGenre = document.createElement('p');
+  var $pHidden = document.createElement('p');
+
+  $watchlistCard.setAttribute('class', 'watchlist-cards-list-padding');
+  $rowWatchlistCard.setAttribute('class', 'row watchlist-list-card');
+  $columnCardPoster.setAttribute('class', 'column-card-poster');
+  $imgPosterSmall.setAttribute('class', 'poster-small');
+  $imgPosterSmall.setAttribute('src', entry.posterURL);
+  $columnCardInfo.setAttribute('class', 'column-card-info white font-roboto');
+  $rowIcon.setAttribute('class', 'row row-icon justify-right');
+  $rowTitle.setAttribute('class', 'watchlist-row-title');
+  $h3Title.setAttribute('class', 'watchlist-list-title');
+  $h3Title.textContent = entry.title;
+  $rowYear.setAttribute('class', 'watchlist-row-year');
+  $pYear.setAttribute('class', 'watchlist-list-year');
+  $pYear.textContent = entry.year;
+  $rowGenre.setAttribute('class', 'watchlist-row-genre');
+  $pGenre.setAttribute('class', 'watchlist-list-genre');
+  $pGenre.textContent = entry.genre;
+  $pHidden.setAttribute('class', 'hidden');
+  $pHidden.textContent = entry.id;
+
+  $watchlistCard.appendChild($rowWatchlistCard);
+  $rowWatchlistCard.appendChild($columnCardPoster);
+  $columnCardPoster.appendChild($imgPosterSmall);
+  $rowWatchlistCard.appendChild($columnCardInfo);
+  $columnCardInfo.appendChild($rowIcon);
+  $columnCardInfo.appendChild($rowTitle);
+  $rowTitle.appendChild($h3Title);
+  $columnCardInfo.appendChild($rowYear);
+  $rowYear.appendChild($pYear);
+  $columnCardInfo.appendChild($rowGenre);
+  $rowGenre.appendChild($pGenre);
+  $columnCardInfo.appendChild($pHidden);
+
+  return $watchlistCard;
+}
+
 $ulElement.addEventListener('click', selectCard);
 function selectCard(event) {
   var $allDetailedCards = document.querySelectorAll('.detailed-card');
@@ -370,6 +421,7 @@ function addToSavedInData(event) {
       cardDataForWatchlist.id = $idElement.textContent;
 
       data.savedCards.unshift(cardDataForWatchlist);
+      $ulWatchlist.appendChild(renderWatchlist(data.savedCards[0]));
     } else if ($addToWatchlist.textContent === 'View Watchlist') {
       switchView('watchlist');
       $backButtonWatchlist.className = 'back-button-watchlist';

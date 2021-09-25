@@ -19,7 +19,9 @@
 }
 
 .search-result-year,
-.search-result-genre {
+.search-result-genre,
+.watchlist-list-year,
+.watchlist-list-genre {
   font-size: 0.8rem;
 }
 
@@ -69,15 +71,18 @@
     width: 100%;
   }
 
-  .search-result-title {
+  .search-result-title,
+  .watchlist-list-title {
     font-size: 2rem;
   }
 
-  .search-result-year {
+  .search-result-year,
+  .watchlist-list-year {
     font-size: 1rem;
   }
 
-  .search-result-genre {
+  .search-result-genre,
+  .watchlist-list-genre {
     font-size: 1rem;
     margin-bottom: 20px;
   }

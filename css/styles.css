@@ -337,6 +337,10 @@ ul {
   margin: 0;
 }
 
+.watchlist-row-title {
+  margin-top: 15px;
+}
+
 /* text styling */
 input {
   font-size: 1.1rem;
