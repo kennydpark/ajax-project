@@ -249,7 +249,8 @@ ul {
   padding: 15px;
 }
 
-.back-button {
+.back-button,
+.back-button-watchlist {
   background: transparent;
   border: none;
   cursor: pointer;

@@ -8,7 +8,8 @@ var $bookmarkIconNav = document.querySelector('#bookmark-icon');
 var $allView = document.querySelectorAll('.view');
 var responseByIDArray = [];
 var $searchMessage = document.querySelector('.search-message');
-var $backButton = document.querySelector('.back-button');
+var $backButtonDetailed = document.querySelector('.back-button');
+var $backButtonWatchlist = document.querySelector('.back-button-watchlist');
 var $searchResultDetailed = document.querySelector('#search-result-detailed');
 var $ulElement = document.querySelector('ul');
 
@@ -100,6 +101,7 @@ function getResponseByID(response) {
 }
 
 function switchView(view) {
+  data.view = view;
   for (var i = 0; i < $allView.length; i++) {
     if (view === $allView[i].getAttribute('data-view')) {
       $allView[i].className = 'view';
@@ -313,7 +315,8 @@ function goHome(event) {
   $searchFormHome.reset();
 }
 
-$backButton.addEventListener('click', goBack);
+$backButtonDetailed.addEventListener('click', goBack);
+$backButtonWatchlist.addEventListener('click', goBack);
 function goBack(event) {
   switchView('search-results');
 }
