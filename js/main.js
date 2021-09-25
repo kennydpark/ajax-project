@@ -112,12 +112,15 @@ function switchView(view) {
   if (view === 'search-home') {
     $movieJournalNav.className = 'movie-journal-anchor white font-roboto hidden';
     $myWatchlistNav.className = 'my-watch-list-anchor white font-roboto';
+    $bookmarkIconNav.className = 'far fa-bookmark';
   }
   if (view === 'search-results') {
     $myWatchlistNav.className = 'my-watch-list-anchor white font-roboto';
+    $bookmarkIconNav.className = 'far fa-bookmark';
   }
   if (view === 'search-result-detailed') {
     $movieJournalNav.className = 'movie-journal-anchor white font-roboto';
+    $bookmarkIconNav.className = 'far fa-bookmark';
   }
   if (view === 'watchlist') {
     $movieJournalNav.className = 'movie-journal-anchor white font-roboto';
@@ -320,6 +323,7 @@ function goHome(event) {
 }
 
 $myWatchlistNav.addEventListener('click', goWatchlist);
+$bookmarkIconNav.addEventListener('click', goWatchlist);
 function goWatchlist(event) {
   switchView('watchlist');
   $backButtonWatchlist.className = 'back-button-watchlist hidden';
