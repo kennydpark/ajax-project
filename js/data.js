@@ -3,7 +3,8 @@ var data = {
   view: '',
   searchHistory: [],
   editing: null,
-  nextSearchId: 1
+  nextSearchId: 1,
+  savedCards: []
 };
 
 window.addEventListener('beforeunload', beforeUnload);

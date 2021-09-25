@@ -120,7 +120,6 @@ function renderResponse(entry) {
   var $imgPoster = document.createElement('img');
   var $columnCardInfo = document.createElement('div');
   var $rowIcon = document.createElement('div');
-  var $plusIcon = document.createElement('i');
   var $rowTitle = document.createElement('div');
   var $h3Title = document.createElement('h3');
   var $rowYear = document.createElement('div');
@@ -137,7 +136,6 @@ function renderResponse(entry) {
   $imgPoster.setAttribute('src', entry.Poster);
   $columnCardInfo.setAttribute('class', 'column-card-info white font-roboto');
   $rowIcon.setAttribute('class', 'row row-icon justify-right');
-  $plusIcon.setAttribute('class', 'fas fa-plus-circle search-result-plus-icon');
   $h3Title.setAttribute('class', 'search-result-title');
   $pYear.setAttribute('class', 'search-result-year');
   $pGenre.setAttribute('class', 'search-result-genre');
@@ -153,7 +151,6 @@ function renderResponse(entry) {
   $columnPoster.appendChild($imgPoster);
   $rowCard.appendChild($columnCardInfo);
   $columnCardInfo.appendChild($rowIcon);
-  $rowIcon.appendChild($plusIcon);
   $columnCardInfo.appendChild($rowTitle);
   $rowTitle.appendChild($h3Title);
   $columnCardInfo.appendChild($rowYear);
@@ -193,6 +190,7 @@ function renderDetailed(entry) {
   var $addCaption = document.createElement('h1');
   var $spanDirector = document.createElement('span');
   var $spanCast = document.createElement('span');
+  var $pHiddenID = document.createElement('p');
 
   $detailedCard.setAttribute('class', 'detailed-card font-roboto');
   $rowCardPoster.setAttribute('class', 'row row-card-poster');
@@ -226,9 +224,12 @@ function renderDetailed(entry) {
   $plusIconBig.setAttribute('class', 'fas fa-plus-circle plus-icon-big white');
   $columnAddCaption.setAttribute('class', 'column-add-caption text-center');
   $addCaption.setAttribute('class', 'add-caption');
-
   $spanDirector.setAttribute('class', 'bold');
   $spanCast.setAttribute('class', 'bold');
+
+  $pHiddenID.setAttribute('class', 'detailed-id hidden');
+  $pHiddenID.textContent = entry.imdbID;
+  $containerCardInfo.appendChild($pHiddenID);
 
   $detailedTitle.textContent = entry.Title;
   $detailedYear.textContent = entry.Year;
@@ -308,4 +309,43 @@ function goHome(event) {
 $backButton.addEventListener('click', goBack);
 function goBack(event) {
   switchView('search-results');
+}
+
+function viewWatchlistCaptionUpdate() {
+  var $addToWatchlist = document.querySelector('.add-caption');
+  $addToWatchlist.textContent = 'View Watchlist';
+}
+
+window.addEventListener('click', addToSavedInData);
+
+function addToSavedInData(event) {
+  var $plusButtonBig = document.querySelector('.plus-button-big');
+  var $plusIconBig = document.querySelector('.plus-icon-big');
+  var $addToWatchlist = document.querySelector('.add-caption');
+  var $posterElement = document.querySelector('.poster-big');
+  var $titleElement = document.querySelector('.detailed-title');
+  var $yearElement = document.querySelector('.detailed-year');
+  var $genreElement = document.querySelector('.detailed-genre');
+  var $directorElement = document.querySelector('.detailed-director');
+  var $castElement = document.querySelector('.detailed-cast');
+  var $plotElement = document.querySelector('.detailed-plot');
+  var $idElement = document.querySelector('.detailed-id');
+  if ((event.target === $plusButtonBig) || (event.target === $plusIconBig) || (event.target === $addToWatchlist)) {
+    if ($addToWatchlist.textContent === 'Add to Watchlist') {
+      $plusIconBig.className = 'fas fa-check-circle plus-icon-big green';
+      $addToWatchlist.textContent = 'Added!';
+      setTimeout(viewWatchlistCaptionUpdate, 1000);
+      var cardDataForWatchlist = {};
+      cardDataForWatchlist.posterURL = $posterElement.getAttribute('src');
+      cardDataForWatchlist.title = $titleElement.textContent;
+      cardDataForWatchlist.year = $yearElement.textContent;
+      cardDataForWatchlist.genre = $genreElement.textContent;
+      cardDataForWatchlist.director = $directorElement.textContent;
+      cardDataForWatchlist.cast = $castElement.textContent;
+      cardDataForWatchlist.plot = $plotElement.textContent;
+      cardDataForWatchlist.id = $idElement.textContent;
+
+      data.savedCards.unshift(cardDataForWatchlist);
+    }
+  }
 }

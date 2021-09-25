@@ -33,6 +33,10 @@
   width: auto;
 }
 
+.column-add-caption {
+  margin-left: 10px;
+}
+
 @media screen and (min-width: 768px) {
   .container {
     max-width: 900px;
@@ -66,7 +70,7 @@
   }
 
   .search-result-title {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
 
   .search-result-year {
@@ -87,6 +91,6 @@
   }
 
   .column-add-caption {
-    width: 50%;
+    width: 40%;
   }
 }
