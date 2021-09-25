@@ -166,9 +166,11 @@ ul {
   margin: 0 auto;
 }
 
-.search-result-card {
+.search-result-card,
+.watchlist-list-card {
   border-radius: 25px;
   background: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
 }
 
 * {
@@ -197,16 +199,19 @@ ul {
   width: 100%;
 }
 
-.search-result-title {
+.search-result-title,
+.watchlist-list-title {
   margin: 10px 15px;
 }
 
-.search-result-year {
+.search-result-year,
+.watchlist-list-year {
   margin: 15px 15px;
   margin-bottom: 10px;
 }
 
-.search-result-genre {
+.search-result-genre,
+.watchlist-list-genre {
   margin: 0 15px;
   padding-bottom: 15px;
 }
@@ -235,7 +240,8 @@ ul {
   color: rgb(25, 211, 0);
 }
 
-.search-results-padding {
+.search-results-padding,
+.watchlist-cards-list-padding {
   padding-bottom: 20px;
 }
 
@@ -316,6 +322,18 @@ ul {
 .add-caption {
   font-size: 1.7rem;
   cursor: pointer;
+}
+
+.row-watchlist-header {
+  margin-bottom: 50px;
+}
+
+.column-my-watchlist {
+  margin: auto;
+}
+
+.my-watchlist-text {
+  margin: 0;
 }
 
 /* text styling */

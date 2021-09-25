@@ -111,6 +111,9 @@ function switchView(view) {
   if (view === 'search-result-detailed') {
     $movieJournalNav.setAttribute('class', 'movie-journal-anchor white font-roboto');
   }
+  if (view === 'watchlist') {
+    $movieJournalNav.setAttribute('class', 'movie-journal-anchor white font-roboto');
+  }
 }
 
 function renderResponse(entry) {
@@ -346,6 +349,8 @@ function addToSavedInData(event) {
       cardDataForWatchlist.id = $idElement.textContent;
 
       data.savedCards.unshift(cardDataForWatchlist);
+    } else if ($addToWatchlist.textContent === 'View Watchlist') {
+      switchView('watchlist');
     }
   }
 }
