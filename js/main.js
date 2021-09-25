@@ -298,7 +298,6 @@ function apiRequestIDDetailed(imdbID) {
 
 function getResponseForDetailed(response) {
   $searchResultDetailed.appendChild(renderDetailed(response));
-  createEventListener();
 }
 
 $movieJournalNav.addEventListener('click', goHome);
@@ -317,9 +316,7 @@ function viewWatchlistCaptionUpdate() {
   $addToWatchlist.textContent = 'View Watchlist';
 }
 
-function createEventListener() {
-  window.addEventListener('click', addToSavedInData);
-}
+window.addEventListener('click', addToSavedInData);
 
 function addToSavedInData(event) {
   var $plusButtonBig = document.querySelector('.plus-button-big');
