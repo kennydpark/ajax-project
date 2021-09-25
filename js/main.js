@@ -318,6 +318,10 @@ function viewWatchlistCaptionUpdate() {
 }
 
 function createEventListener() {
+  window.addEventListener('click', addToSavedInData);
+}
+
+function addToSavedInData(event) {
   var $plusButtonBig = document.querySelector('.plus-button-big');
   var $plusIconBig = document.querySelector('.plus-icon-big');
   var $addToWatchlist = document.querySelector('.add-caption');
@@ -329,24 +333,22 @@ function createEventListener() {
   var $castElement = document.querySelector('.detailed-cast');
   var $plotElement = document.querySelector('.detailed-plot');
   var $idElement = document.querySelector('.detailed-id');
-  window.addEventListener('click', function (event) {
-    if ((event.target === $plusButtonBig) || (event.target === $plusIconBig) || (event.target === $addToWatchlist)) {
-      if ($addToWatchlist.textContent === 'Add to Watchlist') {
-        $plusIconBig.className = 'fas fa-check-circle plus-icon-big green';
-        $addToWatchlist.textContent = 'Added!';
-        setTimeout(viewWatchlistCaptionUpdate, 1000);
-        var cardDataForWatchlist = {};
-        cardDataForWatchlist.posterURL = $posterElement.getAttribute('src');
-        cardDataForWatchlist.title = $titleElement.textContent;
-        cardDataForWatchlist.year = $yearElement.textContent;
-        cardDataForWatchlist.genre = $genreElement.textContent;
-        cardDataForWatchlist.director = $directorElement.textContent;
-        cardDataForWatchlist.cast = $castElement.textContent;
-        cardDataForWatchlist.plot = $plotElement.textContent;
-        cardDataForWatchlist.id = $idElement.textContent;
+  if ((event.target === $plusButtonBig) || (event.target === $plusIconBig) || (event.target === $addToWatchlist)) {
+    if ($addToWatchlist.textContent === 'Add to Watchlist') {
+      $plusIconBig.className = 'fas fa-check-circle plus-icon-big green';
+      $addToWatchlist.textContent = 'Added!';
+      setTimeout(viewWatchlistCaptionUpdate, 1000);
+      var cardDataForWatchlist = {};
+      cardDataForWatchlist.posterURL = $posterElement.getAttribute('src');
+      cardDataForWatchlist.title = $titleElement.textContent;
+      cardDataForWatchlist.year = $yearElement.textContent;
+      cardDataForWatchlist.genre = $genreElement.textContent;
+      cardDataForWatchlist.director = $directorElement.textContent;
+      cardDataForWatchlist.cast = $castElement.textContent;
+      cardDataForWatchlist.plot = $plotElement.textContent;
+      cardDataForWatchlist.id = $idElement.textContent;
 
-        data.savedCards.unshift(cardDataForWatchlist);
-      }
+      data.savedCards.unshift(cardDataForWatchlist);
     }
-  });
+  }
 }
