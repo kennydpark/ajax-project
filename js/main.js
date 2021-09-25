@@ -3,6 +3,8 @@ var $searchFormResults = document.querySelector('.results-form');
 var $searchBarHome = document.querySelector('.search-bar-home');
 var $searchBarResults = document.querySelector('.search-bar-results');
 var $movieJournalNav = document.querySelector('#movie-journal-nav');
+var $myWatchlistNav = document.querySelector('.my-watchlist-anchor');
+var $bookmarkIconNav = document.querySelector('#bookmark-icon');
 var $allView = document.querySelectorAll('.view');
 var responseByIDArray = [];
 var $searchMessage = document.querySelector('.search-message');
@@ -113,6 +115,8 @@ function switchView(view) {
   }
   if (view === 'watchlist') {
     $movieJournalNav.setAttribute('class', 'movie-journal-anchor white font-roboto');
+    $myWatchlistNav.setAttribute('class', 'my-watch-list-anchor white font-roboto hidden');
+    $bookmarkIconNav.setAttribute('class', 'far fa-bookmark hidden');
   }
 }
 
