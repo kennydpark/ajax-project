@@ -7,6 +7,11 @@ var data = {
   savedCards: []
 };
 
+// window.addEventListener('load', function (event) {
+//   var dataJSON = JSON.stringify(data);
+//   localStorage.setItem('data-model', dataJSON);
+// });
+
 window.addEventListener('beforeunload', beforeUnload);
 function beforeUnload(event) {
   var dataJSON = JSON.stringify(data);

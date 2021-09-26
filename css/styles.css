@@ -160,7 +160,8 @@ ul {
 }
 
 #search-results-content,
-#search-result-detailed {
+#search-result-detailed,
+#watchlist {
   position: relative;
   width: 90%;
   margin: 0 auto;
