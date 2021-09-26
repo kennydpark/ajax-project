@@ -103,6 +103,8 @@ function getResponseByID(response) {
   }
 }
 
+// switchView ---------------------------------------------------------------------------
+//
 function switchView(view) {
   data.view = view;
   for (var i = 0; i < $allView.length; i++) {
@@ -126,6 +128,10 @@ function switchView(view) {
   if (view === 'watchlist') {
     $movieJournalNav.className = 'movie-journal-anchor white font-roboto';
     $colNav.className = 'col-nav justify-right hidden';
+    for (var n = 0; n < data.savedCards.length; n++) {
+      var watchlistDomTree = renderWatchlist(data.savedCards[n]);
+      $ulWatchlist.appendChild(watchlistDomTree);
+    }
   }
   if (data.savedCards.length === 0) {
     $emptyWatchlistCaption.className = 'empty-watchlist-caption white font-roboto text-center';
@@ -247,26 +253,20 @@ function renderDetailed(entry) {
   $addCaption.setAttribute('class', 'add-caption');
   $spanDirector.setAttribute('class', 'bold');
   $spanCast.setAttribute('class', 'bold');
-
   $pHiddenID.setAttribute('class', 'detailed-id hidden');
   $pHiddenID.textContent = entry.imdbID;
   $containerCardInfo.appendChild($pHiddenID);
-
   $detailedTitle.textContent = entry.Title;
   $detailedYear.textContent = entry.Year;
   $detailedGenre.textContent = entry.Genre;
-
   $spanDirector.textContent = entry.Director;
   $detailedDirector.textContent = 'Director: ';
   $detailedDirector.append($spanDirector);
-
   $spanCast.textContent = entry.Actors;
   $detailedCast.textContent = 'Cast: ';
   $detailedCast.append($spanCast);
-
   $detailedPlot.textContent = entry.Plot;
   $addCaption.textContent = 'Add to Watchlist';
-
   $detailedCard.appendChild($rowCardPoster);
   $rowCardPoster.appendChild($imgPosterBig);
   $detailedCard.appendChild($containerCardInfo);
@@ -355,6 +355,7 @@ function selectCard(event) {
   var imdbID = event.target.closest('li').getAttribute('imdbid');
   apiRequestIDDetailed(imdbID);
   switchView('search-result-detailed');
+  data.selectedCardID = imdbID;
 }
 
 function apiRequestIDDetailed(imdbID) {
@@ -397,7 +398,6 @@ function viewWatchlistCaptionUpdate() {
 }
 
 window.addEventListener('click', addToSavedInData);
-
 function addToSavedInData(event) {
   var $plusButtonBig = document.querySelector('.plus-button-big');
   var $plusIconBig = document.querySelector('.plus-icon-big');
@@ -428,10 +428,10 @@ function addToSavedInData(event) {
       data.savedCards.unshift(cardDataForWatchlist);
       // var newAddedCard = renderWatchlist(data.savedCards[0]);
       // $ulWatchlist.prepend(newAddedCard);
-      for (var i = 0; i < data.savedCards.length; i++) {
-        var watchlistDomTree = renderWatchlist(data.savedCards[i]);
-        $ulWatchlist.appendChild(watchlistDomTree);
-      }
+      // for (var i = 0; i < data.savedCards.length; i++) {
+      //   var watchlistDomTree = renderWatchlist(data.savedCards[i]);
+      //   $ulWatchlist.appendChild(watchlistDomTree);
+      // }
     } else if ($addToWatchlist.textContent === 'View Watchlist') {
       switchView('watchlist');
       $backButtonWatchlist.className = 'back-button-watchlist';
@@ -441,12 +441,13 @@ function addToSavedInData(event) {
 
 document.addEventListener('DOMContentLoaded', loadedPage);
 function loadedPage(event) {
-  for (var i = 0; i < data.savedCards.length; i++) {
-    var watchlistDomTree = renderWatchlist(data.savedCards[i]);
-    $ulWatchlist.appendChild(watchlistDomTree);
-  }
+  // for (var i = 0; i < data.savedCards.length; i++) {
+  //   var watchlistDomTree = renderWatchlist(data.savedCards[i]);
+  //   $ulWatchlist.appendChild(watchlistDomTree);
+  // }
   $searchBarResults.value = data.searchHistory[0].keyword;
   getMovieData(data.searchHistory[0].keyword);
+
   switchView(data.view);
   if (data.view === 'search-results') {
     $searchMessage.textContent = 'Showing results for ' + '\'' + $searchBarResults.value + '\'';
@@ -457,5 +458,8 @@ function loadedPage(event) {
     //     $renderedPosters[x].setAttribute('src', '../images/image-unavailable.jpg');
     //   }
     // }
+  }
+  if (data.view === 'search-result-detailed') {
+    apiRequestIDDetailed(data.selectedCardID);
   }
 }
