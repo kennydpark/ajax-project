@@ -353,6 +353,7 @@ function selectCard(event) {
     $allDetailedCards[i].remove();
   }
   var imdbID = event.target.closest('li').getAttribute('imdbid');
+
   apiRequestIDDetailed(imdbID);
   switchView('search-result-detailed');
   data.selectedCardID = imdbID;
@@ -370,6 +371,14 @@ function apiRequestIDDetailed(imdbID) {
 
 function getResponseForDetailed(response) {
   $searchResultDetailed.appendChild(renderDetailed(response));
+  var $addToWatchlist = document.querySelector('.add-caption');
+  var $plusIconBig = document.querySelector('.plus-icon-big');
+  for (var n = 0; n < data.savedCards.length; n++) {
+    if (data.selectedCardID === data.savedCards[n].id) {
+      $addToWatchlist.textContent = 'In Watchlist';
+      $plusIconBig.className = 'fas fa-check-circle plus-icon-big green';
+    }
+  }
 }
 
 $movieJournalNav.addEventListener('click', goHome);

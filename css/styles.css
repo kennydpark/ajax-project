@@ -323,6 +323,7 @@ ul {
 .add-caption {
   font-size: 1.7rem;
   cursor: pointer;
+  transition: 0.15s ease-in-out;
 }
 
 .row-watchlist-header {
