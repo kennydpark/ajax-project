@@ -103,8 +103,6 @@ function getResponseByID(response) {
   }
 }
 
-// switchView ---------------------------------------------------------------------------
-//
 function switchView(view) {
   data.view = view;
   for (var i = 0; i < $allView.length; i++) {
@@ -435,12 +433,6 @@ function addToSavedInData(event) {
       cardDataForWatchlist.id = $idElement.textContent;
 
       data.savedCards.unshift(cardDataForWatchlist);
-      // var newAddedCard = renderWatchlist(data.savedCards[0]);
-      // $ulWatchlist.prepend(newAddedCard);
-      // for (var i = 0; i < data.savedCards.length; i++) {
-      //   var watchlistDomTree = renderWatchlist(data.savedCards[i]);
-      //   $ulWatchlist.appendChild(watchlistDomTree);
-      // }
     } else if ($addToWatchlist.textContent === 'View Watchlist') {
       switchView('watchlist');
       $backButtonWatchlist.className = 'back-button-watchlist';
@@ -450,10 +442,6 @@ function addToSavedInData(event) {
 
 document.addEventListener('DOMContentLoaded', loadedPage);
 function loadedPage(event) {
-  // for (var i = 0; i < data.savedCards.length; i++) {
-  //   var watchlistDomTree = renderWatchlist(data.savedCards[i]);
-  //   $ulWatchlist.appendChild(watchlistDomTree);
-  // }
   $searchBarResults.value = data.searchHistory[0].keyword;
   getMovieData(data.searchHistory[0].keyword);
 
@@ -461,12 +449,6 @@ function loadedPage(event) {
   if (data.view === 'search-results') {
     $searchMessage.textContent = 'Showing results for ' + '\'' + $searchBarResults.value + '\'';
     $movieJournalNav.className = 'movie-journal-anchor white font-roboto';
-    // var $renderedPosters = document.querySelectorAll('.poster-small');
-    // for (var x = 0; x < $renderedPosters.length; x++) {
-    //   if ($renderedPosters[x].getAttribute('src') === 'N/A') {
-    //     $renderedPosters[x].setAttribute('src', '../images/image-unavailable.jpg');
-    //   }
-    // }
   }
   if (data.view === 'search-result-detailed') {
     apiRequestIDDetailed(data.selectedCardID);
