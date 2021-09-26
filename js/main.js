@@ -14,6 +14,7 @@ var $searchResultDetailed = document.querySelector('#search-result-detailed');
 var $ulElement = document.querySelector('ul');
 var $ulWatchlist = document.querySelector('.ul-watchlist');
 var $colNav = document.querySelector('.col-nav');
+var $emptyWatchlistCaption = document.querySelector('.empty-watchlist-caption');
 
 $searchFormHome.addEventListener('submit', submitSearch);
 function submitSearch(event) {
@@ -125,6 +126,11 @@ function switchView(view) {
   if (view === 'watchlist') {
     $movieJournalNav.className = 'movie-journal-anchor white font-roboto';
     $colNav.className = 'col-nav justify-right hidden';
+  }
+  if (data.savedCards.length === 0) {
+    $emptyWatchlistCaption.className = 'empty-watchlist-caption white font-roboto text-center';
+  } else {
+    $emptyWatchlistCaption.className = 'empty-watchlist-caption white font-roboto text-center hidden';
   }
 }
 
