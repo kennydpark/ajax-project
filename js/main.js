@@ -382,6 +382,7 @@ $backButtonDetailed.addEventListener('click', goBack);
 $backButtonWatchlist.addEventListener('click', goBack);
 function goBack(event) {
   switchView('search-results');
+  $searchMessage.textContent = 'Showing results for ' + '\'' + $searchBarResults.value + '\'';
 }
 
 function viewWatchlistCaptionUpdate() {
@@ -438,5 +439,17 @@ function loadedPage(event) {
     var watchlistDomTree = renderWatchlist(data.savedCards[i]);
     $ulWatchlist.appendChild(watchlistDomTree);
   }
+  $searchBarResults.value = data.searchHistory[0].keyword;
+  getMovieData(data.searchHistory[0].keyword);
   switchView(data.view);
+  if (data.view === 'search-results') {
+    $searchMessage.textContent = 'Showing results for ' + '\'' + $searchBarResults.value + '\'';
+    $movieJournalNav.className = 'movie-journal-anchor white font-roboto';
+    // var $renderedPosters = document.querySelectorAll('.poster-small');
+    // for (var x = 0; x < $renderedPosters.length; x++) {
+    //   if ($renderedPosters[x].getAttribute('src') === 'N/A') {
+    //     $renderedPosters[x].setAttribute('src', '../images/image-unavailable.jpg');
+    //   }
+    // }
+  }
 }
