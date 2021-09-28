@@ -54,7 +54,8 @@ function submitSearchResults(event) {
 
 function getMovieData(search) {
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', 'http://www.omdbapi.com/?apikey=67ac1937' + '&s=' + search);
+  xhr.open('GET', 'https://www.omdbapi.com/?apikey=67ac1937' + '&s=' + search);
+
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     renderMovieDOMTrees(xhr.response.Search);
@@ -73,7 +74,7 @@ function renderMovieDOMTrees(response) {
 
 function apiRequestID(imdbID) {
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', 'http://www.omdbapi.com/?apikey=67ac1937' + '&i=' + imdbID);
+  xhr.open('GET', 'https://www.omdbapi.com/?apikey=67ac1937' + '&i=' + imdbID);
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     getResponseByID(xhr.response);
@@ -359,7 +360,7 @@ function selectCard(event) {
 
 function apiRequestIDDetailed(imdbID) {
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', 'http://www.omdbapi.com/?apikey=67ac1937' + '&i=' + imdbID);
+  xhr.open('GET', 'https://www.omdbapi.com/?apikey=67ac1937' + '&i=' + imdbID);
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     getResponseForDetailed(xhr.response);
