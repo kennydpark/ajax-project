@@ -1,9 +1,10 @@
 /* exported data */
 var data = {
-  view: '',
+  view: 'search-home',
   searchHistory: [],
   editing: null,
   nextSearchId: 1,
+  selectedCardID: '',
   savedCards: []
 };
 

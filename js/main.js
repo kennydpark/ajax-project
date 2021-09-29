@@ -3,12 +3,18 @@ var $searchFormResults = document.querySelector('.results-form');
 var $searchBarHome = document.querySelector('.search-bar-home');
 var $searchBarResults = document.querySelector('.search-bar-results');
 var $movieJournalNav = document.querySelector('#movie-journal-nav');
+var $myWatchlistNav = document.querySelector('.my-watchlist-anchor');
+var $bookmarkIconNav = document.querySelector('#bookmark-icon');
 var $allView = document.querySelectorAll('.view');
 var responseByIDArray = [];
 var $searchMessage = document.querySelector('.search-message');
-var $backButton = document.querySelector('.back-button');
+var $backButtonDetailed = document.querySelector('.back-button');
+var $backButtonWatchlist = document.querySelector('.back-button-watchlist');
 var $searchResultDetailed = document.querySelector('#search-result-detailed');
 var $ulElement = document.querySelector('ul');
+var $ulWatchlist = document.querySelector('.ul-watchlist');
+var $colNav = document.querySelector('.col-nav');
+var $emptyWatchlistCaption = document.querySelector('.empty-watchlist-caption');
 
 $searchFormHome.addEventListener('submit', submitSearch);
 function submitSearch(event) {
@@ -22,9 +28,9 @@ function submitSearch(event) {
   data.searchHistory.unshift(searchValue);
   data.nextSearchId++;
   getMovieData(data.searchHistory[0].keyword);
-  var $allList = document.querySelectorAll('li');
-  for (var i = 0; i < $allList.length; i++) {
-    $allList[i].remove();
+  var $allSearchResults = document.querySelectorAll('.search-results-padding');
+  for (var i = 0; i < $allSearchResults.length; i++) {
+    $allSearchResults[i].remove();
   }
   $searchMessage.textContent = 'Showing results for ' + '\'' + $searchBarHome.value + '\'';
 }
@@ -48,10 +54,12 @@ function submitSearchResults(event) {
 
 function getMovieData(search) {
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', 'http://www.omdbapi.com/?apikey=67ac1937' + '&s=' + search);
+  xhr.open('GET', 'https://www.omdbapi.com/?apikey=67ac1937' + '&s=' + search);
+
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     renderMovieDOMTrees(xhr.response.Search);
+    $searchMessage.textContent = 'Showing results for ' + '\'' + $searchBarResults.value + '\'';
   });
   xhr.send();
 }
@@ -67,7 +75,7 @@ function renderMovieDOMTrees(response) {
 
 function apiRequestID(imdbID) {
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', 'http://www.omdbapi.com/?apikey=67ac1937' + '&i=' + imdbID);
+  xhr.open('GET', 'https://www.omdbapi.com/?apikey=67ac1937' + '&i=' + imdbID);
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     getResponseByID(xhr.response);
@@ -92,12 +100,13 @@ function getResponseByID(response) {
   }
   for (var x = 0; x < $renderedPosters.length; x++) {
     if ($renderedPosters[x].getAttribute('src') === 'N/A') {
-      $renderedPosters[x].setAttribute('src', '../images/image-unavailable.jpg');
+      $renderedPosters[x].setAttribute('src', 'images/image-unavailable.jpg');
     }
   }
 }
 
 function switchView(view) {
+  data.view = view;
   for (var i = 0; i < $allView.length; i++) {
     if (view === $allView[i].getAttribute('data-view')) {
       $allView[i].className = 'view';
@@ -106,10 +115,24 @@ function switchView(view) {
     }
   }
   if (view === 'search-home') {
-    $movieJournalNav.setAttribute('class', 'movie-journal-anchor white font-roboto hidden');
+    $movieJournalNav.className = 'movie-journal-anchor white font-roboto hidden';
+    $colNav.className = 'col-nav justify-right';
+  }
+  if (view === 'search-results') {
+    $colNav.className = 'col-nav justify-right';
   }
   if (view === 'search-result-detailed') {
-    $movieJournalNav.setAttribute('class', 'movie-journal-anchor white font-roboto');
+    $movieJournalNav.className = 'movie-journal-anchor white font-roboto';
+    $colNav.className = 'col-nav justify-right';
+  }
+  if (view === 'watchlist') {
+    $movieJournalNav.className = 'movie-journal-anchor white font-roboto';
+    $colNav.className = 'col-nav justify-right hidden';
+  }
+  if (data.savedCards.length === 0) {
+    $emptyWatchlistCaption.className = 'empty-watchlist-caption white font-roboto text-center';
+  } else {
+    $emptyWatchlistCaption.className = 'empty-watchlist-caption white font-roboto text-center hidden';
   }
 }
 
@@ -197,7 +220,7 @@ function renderDetailed(entry) {
   $imgPosterBig.setAttribute('class', 'poster-big');
   $imgPosterBig.setAttribute('src', entry.Poster);
   if (entry.Poster === 'N/A') {
-    $imgPosterBig.setAttribute('src', '../images/image-unavailable.jpg');
+    $imgPosterBig.setAttribute('src', 'images/image-unavailable.jpg');
   }
   $containerCardInfo.setAttribute('class', 'container-card-info');
   $rowCardTitle.setAttribute('class', 'row row-card-title white');
@@ -226,26 +249,20 @@ function renderDetailed(entry) {
   $addCaption.setAttribute('class', 'add-caption');
   $spanDirector.setAttribute('class', 'bold');
   $spanCast.setAttribute('class', 'bold');
-
   $pHiddenID.setAttribute('class', 'detailed-id hidden');
   $pHiddenID.textContent = entry.imdbID;
   $containerCardInfo.appendChild($pHiddenID);
-
   $detailedTitle.textContent = entry.Title;
   $detailedYear.textContent = entry.Year;
   $detailedGenre.textContent = entry.Genre;
-
   $spanDirector.textContent = entry.Director;
   $detailedDirector.textContent = 'Director: ';
   $detailedDirector.append($spanDirector);
-
   $spanCast.textContent = entry.Actors;
   $detailedCast.textContent = 'Cast: ';
   $detailedCast.append($spanCast);
-
   $detailedPlot.textContent = entry.Plot;
   $addCaption.textContent = 'Add to Watchlist';
-
   $detailedCard.appendChild($rowCardPoster);
   $rowCardPoster.appendChild($imgPosterBig);
   $detailedCard.appendChild($containerCardInfo);
@@ -275,6 +292,56 @@ function renderDetailed(entry) {
   return $detailedCard;
 }
 
+function renderWatchlist(entry) {
+  var $watchlistCard = document.createElement('li');
+  var $rowWatchlistCard = document.createElement('div');
+  var $columnCardPoster = document.createElement('div');
+  var $imgPosterSmall = document.createElement('img');
+  var $columnCardInfo = document.createElement('div');
+  var $rowIcon = document.createElement('div');
+  var $rowTitle = document.createElement('div');
+  var $h3Title = document.createElement('h3');
+  var $rowYear = document.createElement('div');
+  var $pYear = document.createElement('p');
+  var $rowGenre = document.createElement('div');
+  var $pGenre = document.createElement('p');
+  var $pHidden = document.createElement('p');
+
+  $watchlistCard.setAttribute('class', 'watchlist-cards-list-padding');
+  $rowWatchlistCard.setAttribute('class', 'row watchlist-list-card');
+  $columnCardPoster.setAttribute('class', 'column-card-poster');
+  $imgPosterSmall.setAttribute('class', 'poster-small');
+  $imgPosterSmall.setAttribute('src', entry.posterURL);
+  $columnCardInfo.setAttribute('class', 'column-card-info white font-roboto');
+  $rowIcon.setAttribute('class', 'row row-icon justify-right');
+  $rowTitle.setAttribute('class', 'watchlist-row-title');
+  $h3Title.setAttribute('class', 'watchlist-list-title');
+  $h3Title.textContent = entry.title;
+  $rowYear.setAttribute('class', 'watchlist-row-year');
+  $pYear.setAttribute('class', 'watchlist-list-year');
+  $pYear.textContent = entry.year;
+  $rowGenre.setAttribute('class', 'watchlist-row-genre');
+  $pGenre.setAttribute('class', 'watchlist-list-genre');
+  $pGenre.textContent = entry.genre;
+  $pHidden.setAttribute('class', 'hidden');
+  $pHidden.textContent = entry.id;
+
+  $watchlistCard.appendChild($rowWatchlistCard);
+  $rowWatchlistCard.appendChild($columnCardPoster);
+  $columnCardPoster.appendChild($imgPosterSmall);
+  $rowWatchlistCard.appendChild($columnCardInfo);
+  $columnCardInfo.appendChild($rowIcon);
+  $columnCardInfo.appendChild($rowTitle);
+  $rowTitle.appendChild($h3Title);
+  $columnCardInfo.appendChild($rowYear);
+  $rowYear.appendChild($pYear);
+  $columnCardInfo.appendChild($rowGenre);
+  $rowGenre.appendChild($pGenre);
+  $columnCardInfo.appendChild($pHidden);
+
+  return $watchlistCard;
+}
+
 $ulElement.addEventListener('click', selectCard);
 function selectCard(event) {
   var $allDetailedCards = document.querySelectorAll('.detailed-card');
@@ -282,13 +349,15 @@ function selectCard(event) {
     $allDetailedCards[i].remove();
   }
   var imdbID = event.target.closest('li').getAttribute('imdbid');
+
   apiRequestIDDetailed(imdbID);
   switchView('search-result-detailed');
+  data.selectedCardID = imdbID;
 }
 
 function apiRequestIDDetailed(imdbID) {
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', 'http://www.omdbapi.com/?apikey=67ac1937' + '&i=' + imdbID);
+  xhr.open('GET', 'https://www.omdbapi.com/?apikey=67ac1937' + '&i=' + imdbID);
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     getResponseForDetailed(xhr.response);
@@ -298,6 +367,14 @@ function apiRequestIDDetailed(imdbID) {
 
 function getResponseForDetailed(response) {
   $searchResultDetailed.appendChild(renderDetailed(response));
+  var $addToWatchlist = document.querySelector('.add-caption');
+  var $plusIconBig = document.querySelector('.plus-icon-big');
+  for (var n = 0; n < data.savedCards.length; n++) {
+    if (data.selectedCardID === data.savedCards[n].id) {
+      $addToWatchlist.textContent = 'In Watchlist';
+      $plusIconBig.className = 'fas fa-check-circle plus-icon-big green';
+    }
+  }
 }
 
 $movieJournalNav.addEventListener('click', goHome);
@@ -306,9 +383,18 @@ function goHome(event) {
   $searchFormHome.reset();
 }
 
-$backButton.addEventListener('click', goBack);
+$myWatchlistNav.addEventListener('click', goWatchlist);
+$bookmarkIconNav.addEventListener('click', goWatchlist);
+function goWatchlist(event) {
+  switchView('watchlist');
+  $backButtonWatchlist.className = 'back-button-watchlist hidden';
+}
+
+$backButtonDetailed.addEventListener('click', goBack);
+$backButtonWatchlist.addEventListener('click', goBack);
 function goBack(event) {
   switchView('search-results');
+  $searchMessage.textContent = 'Showing results for ' + '\'' + $searchBarResults.value + '\'';
 }
 
 function viewWatchlistCaptionUpdate() {
@@ -317,7 +403,6 @@ function viewWatchlistCaptionUpdate() {
 }
 
 window.addEventListener('click', addToSavedInData);
-
 function addToSavedInData(event) {
   var $plusButtonBig = document.querySelector('.plus-button-big');
   var $plusIconBig = document.querySelector('.plus-icon-big');
@@ -346,6 +431,29 @@ function addToSavedInData(event) {
       cardDataForWatchlist.id = $idElement.textContent;
 
       data.savedCards.unshift(cardDataForWatchlist);
+      var watchlistNewCard = renderWatchlist(data.savedCards[0]);
+      $ulWatchlist.prepend(watchlistNewCard);
+    } else if ($addToWatchlist.textContent === 'View Watchlist') {
+      switchView('watchlist');
+      $backButtonWatchlist.className = 'back-button-watchlist';
     }
+  }
+}
+
+document.addEventListener('DOMContentLoaded', loadedPage);
+function loadedPage(event) {
+  $searchBarResults.value = data.searchHistory[0].keyword;
+  getMovieData(data.searchHistory[0].keyword);
+
+  switchView(data.view);
+  if (data.view === 'search-results') {
+    $movieJournalNav.className = 'movie-journal-anchor white font-roboto';
+  }
+  if (data.view === 'search-result-detailed') {
+    apiRequestIDDetailed(data.selectedCardID);
+  }
+  for (var n = 0; n < data.savedCards.length; n++) {
+    var watchlistDomTree = renderWatchlist(data.savedCards[n]);
+    $ulWatchlist.appendChild(watchlistDomTree);
   }
 }

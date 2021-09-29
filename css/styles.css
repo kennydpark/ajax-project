@@ -94,21 +94,21 @@ ul {
   border-style: none;
   background-color: rgba(255, 255, 255, 0.224);
   position: relative;
-  transition: 0.15s ease-out;
+  transition: 0.2s ease-out;
 }
 
 .search-bar-home:focus {
   outline: none;
   border: none;
   box-shadow: 0 0 0 1.5px white;
-  transition: 0.15s ease-out;
+  transition: 0.2s ease-out;
 }
 
 .search-bar-results:focus {
   outline: none;
   border: none;
   box-shadow: 0 0 0 1.5px white;
-  transition: 0.15s ease-out;
+  transition: 0.2s ease-out;
 }
 
 .search-button-results {
@@ -135,12 +135,12 @@ ul {
   color: white;
   opacity: 0.5;
   cursor: pointer;
-  transition: 0.15s ease-out;
+  transition: 0.2s ease-out;
 }
 
 .search-icon:hover {
   opacity: 1;
-  transition: 0.15s;
+  transition: 0.2s;
 }
 
 ::placeholder {
@@ -160,15 +160,18 @@ ul {
 }
 
 #search-results-content,
-#search-result-detailed {
+#search-result-detailed,
+#watchlist {
   position: relative;
   width: 90%;
   margin: 0 auto;
 }
 
-.search-result-card {
+.search-result-card,
+.watchlist-list-card {
   border-radius: 25px;
   background: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
 }
 
 * {
@@ -197,16 +200,19 @@ ul {
   width: 100%;
 }
 
-.search-result-title {
+.search-result-title,
+.watchlist-list-title {
   margin: 10px 15px;
 }
 
-.search-result-year {
+.search-result-year,
+.watchlist-list-year {
   margin: 15px 15px;
   margin-bottom: 10px;
 }
 
-.search-result-genre {
+.search-result-genre,
+.watchlist-list-genre {
   margin: 0 15px;
   padding-bottom: 15px;
 }
@@ -235,7 +241,8 @@ ul {
   color: rgb(25, 211, 0);
 }
 
-.search-results-padding {
+.search-results-padding,
+.watchlist-cards-list-padding {
   padding-bottom: 20px;
 }
 
@@ -243,7 +250,8 @@ ul {
   padding: 15px;
 }
 
-.back-button {
+.back-button,
+.back-button-watchlist {
   background: transparent;
   border: none;
   cursor: pointer;
@@ -309,13 +317,29 @@ ul {
 }
 
 .column-add-caption {
-  /* width: 60%; */
   line-height: 50px;
 }
 
 .add-caption {
   font-size: 1.7rem;
   cursor: pointer;
+  transition: 0.15s ease-in-out;
+}
+
+.row-watchlist-header {
+  margin-bottom: 50px;
+}
+
+.column-my-watchlist {
+  margin: auto;
+}
+
+.my-watchlist-text {
+  margin: 0;
+}
+
+.watchlist-row-title {
+  margin-top: 15px;
 }
 
 /* text styling */

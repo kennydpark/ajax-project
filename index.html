@@ -23,8 +23,8 @@
               <a id="movie-journal-nav" class="movie-journal-anchor white font-roboto hidden">MovieJournal</a>
             </div>
             <div class="col-nav justify-right">
-              <i class="far fa-bookmark" id="bookmark-icon"></i>
-              <a class="my-watchlist-anchor white font-roboto">My Watchlist</a>
+              <i class="far fa-bookmark" id="bookmark-icon" type="button"></i>
+              <a class="my-watchlist-anchor white font-roboto" type="button">My Watchlist</a>
             </div>
           </div>
         </div>
@@ -74,10 +74,24 @@
         <div class="row row-back">
           <button class="back-button" type="button"><i class="fas fa-angle-left back-icon"></i></button>
         </div>
-
       </div>
-    </div>
 
+      <div data-view="watchlist" id="watchlist" class="view hidden">
+        <div class="row row-back row-watchlist-header white">
+          <div class="column">
+            <button class="back-button-watchlist" type="button"><i class="fas fa-angle-left back-icon"></i></button>
+          </div>
+          <div class="column-my-watchlist">
+            <h1 class="my-watchlist-text font-roboto justify-center">My Watchlist</h1>
+          </div>
+        </div>
+        <p class="empty-watchlist-caption white font-roboto text-center hidden">Your Watchlist is currently empty.</p>
+
+        <ul class="ul-watchlist">
+        </ul>
+      </div>
+
+    </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>

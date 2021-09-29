@@ -19,7 +19,9 @@
 }
 
 .search-result-year,
-.search-result-genre {
+.search-result-genre,
+.watchlist-list-year,
+.watchlist-list-genre {
   font-size: 0.8rem;
 }
 
@@ -52,7 +54,7 @@
   }
 
   .search-result-card {
-    height: 270px;
+    height: 280px;
   }
 
   .column-card-info {
@@ -60,7 +62,7 @@
   }
 
   .poster-small {
-    height: 270px;
+    height: 280px;
     width: 100%;
   }
 
@@ -69,16 +71,20 @@
     width: 100%;
   }
 
-  .search-result-title {
+  .search-result-title,
+  .watchlist-list-title {
     font-size: 2rem;
+    padding-bottom: 20px;
   }
 
-  .search-result-year {
-    font-size: 1rem;
+  .search-result-year,
+  .watchlist-list-year {
+    font-size: 1.2rem;
   }
 
-  .search-result-genre {
-    font-size: 1rem;
+  .search-result-genre,
+  .watchlist-list-genre {
+    font-size: 1.2rem;
     margin-bottom: 20px;
   }
 
