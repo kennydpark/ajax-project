@@ -59,6 +59,8 @@ function getMovieData(search) {
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     renderMovieDOMTrees(xhr.response.Search);
+    $searchMessage.textContent = 'Showing results for ' + '\'' + $searchBarResults.value + '\'';
+    // $movieJournalNav.className = 'movie-journal-anchor white font-roboto';
   });
   xhr.send();
 }
@@ -127,10 +129,10 @@ function switchView(view) {
   if (view === 'watchlist') {
     $movieJournalNav.className = 'movie-journal-anchor white font-roboto';
     $colNav.className = 'col-nav justify-right hidden';
-    for (var n = 0; n < data.savedCards.length; n++) {
-      var watchlistDomTree = renderWatchlist(data.savedCards[n]);
-      $ulWatchlist.appendChild(watchlistDomTree);
-    }
+    // for (var n = 0; n < data.savedCards.length; n++) {
+    //   var watchlistDomTree = renderWatchlist(data.savedCards[n]);
+    //   $ulWatchlist.appendChild(watchlistDomTree);
+    // }
   }
   if (data.savedCards.length === 0) {
     $emptyWatchlistCaption.className = 'empty-watchlist-caption white font-roboto text-center';
@@ -434,6 +436,10 @@ function addToSavedInData(event) {
       cardDataForWatchlist.id = $idElement.textContent;
 
       data.savedCards.unshift(cardDataForWatchlist);
+      for (var n = 0; n < data.savedCards.length; n++) {
+        var watchlistDomTree = renderWatchlist(data.savedCards[n]);
+        $ulWatchlist.appendChild(watchlistDomTree);
+      }
     } else if ($addToWatchlist.textContent === 'View Watchlist') {
       switchView('watchlist');
       $backButtonWatchlist.className = 'back-button-watchlist';
@@ -448,10 +454,13 @@ function loadedPage(event) {
 
   switchView(data.view);
   if (data.view === 'search-results') {
-    $searchMessage.textContent = 'Showing results for ' + '\'' + $searchBarResults.value + '\'';
     $movieJournalNav.className = 'movie-journal-anchor white font-roboto';
   }
   if (data.view === 'search-result-detailed') {
     apiRequestIDDetailed(data.selectedCardID);
+  }
+  for (var n = 0; n < data.savedCards.length; n++) {
+    var watchlistDomTree = renderWatchlist(data.savedCards[n]);
+    $ulWatchlist.appendChild(watchlistDomTree);
   }
 }
