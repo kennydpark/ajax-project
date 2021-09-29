@@ -60,7 +60,6 @@ function getMovieData(search) {
   xhr.addEventListener('load', function () {
     renderMovieDOMTrees(xhr.response.Search);
     $searchMessage.textContent = 'Showing results for ' + '\'' + $searchBarResults.value + '\'';
-    // $movieJournalNav.className = 'movie-journal-anchor white font-roboto';
   });
   xhr.send();
 }
@@ -129,10 +128,6 @@ function switchView(view) {
   if (view === 'watchlist') {
     $movieJournalNav.className = 'movie-journal-anchor white font-roboto';
     $colNav.className = 'col-nav justify-right hidden';
-    // for (var n = 0; n < data.savedCards.length; n++) {
-    //   var watchlistDomTree = renderWatchlist(data.savedCards[n]);
-    //   $ulWatchlist.appendChild(watchlistDomTree);
-    // }
   }
   if (data.savedCards.length === 0) {
     $emptyWatchlistCaption.className = 'empty-watchlist-caption white font-roboto text-center';
