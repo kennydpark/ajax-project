@@ -28,9 +28,9 @@ function submitSearch(event) {
   data.searchHistory.unshift(searchValue);
   data.nextSearchId++;
   getMovieData(data.searchHistory[0].keyword);
-  var $allList = document.querySelectorAll('li');
-  for (var i = 0; i < $allList.length; i++) {
-    $allList[i].remove();
+  var $allSearchResults = document.querySelectorAll('.search-results-padding');
+  for (var i = 0; i < $allSearchResults.length; i++) {
+    $allSearchResults[i].remove();
   }
   $searchMessage.textContent = 'Showing results for ' + '\'' + $searchBarHome.value + '\'';
 }
@@ -100,7 +100,7 @@ function getResponseByID(response) {
   }
   for (var x = 0; x < $renderedPosters.length; x++) {
     if ($renderedPosters[x].getAttribute('src') === 'N/A') {
-      $renderedPosters[x].setAttribute('src', '../images/image-unavailable.jpg');
+      $renderedPosters[x].setAttribute('src', 'images/image-unavailable.jpg');
     }
   }
 }
@@ -220,7 +220,7 @@ function renderDetailed(entry) {
   $imgPosterBig.setAttribute('class', 'poster-big');
   $imgPosterBig.setAttribute('src', entry.Poster);
   if (entry.Poster === 'N/A') {
-    $imgPosterBig.setAttribute('src', '../images/image-unavailable.jpg');
+    $imgPosterBig.setAttribute('src', 'images/image-unavailable.jpg');
   }
   $containerCardInfo.setAttribute('class', 'container-card-info');
   $rowCardTitle.setAttribute('class', 'row row-card-title white');
@@ -431,10 +431,8 @@ function addToSavedInData(event) {
       cardDataForWatchlist.id = $idElement.textContent;
 
       data.savedCards.unshift(cardDataForWatchlist);
-      for (var n = 0; n < data.savedCards.length; n++) {
-        var watchlistDomTree = renderWatchlist(data.savedCards[n]);
-        $ulWatchlist.appendChild(watchlistDomTree);
-      }
+      var watchlistDomTree = renderWatchlist(data.savedCards[0]);
+      $ulWatchlist.prepend(watchlistDomTree);
     } else if ($addToWatchlist.textContent === 'View Watchlist') {
       switchView('watchlist');
       $backButtonWatchlist.className = 'back-button-watchlist';
