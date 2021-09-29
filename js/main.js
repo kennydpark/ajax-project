@@ -308,6 +308,7 @@ function renderWatchlist(entry) {
   var $pHidden = document.createElement('p');
 
   $watchlistCard.setAttribute('class', 'watchlist-cards-list-padding');
+  $watchlistCard.setAttribute('imdbid', entry.id);
   $rowWatchlistCard.setAttribute('class', 'row watchlist-list-card');
   $columnCardPoster.setAttribute('class', 'column-card-poster');
   $imgPosterSmall.setAttribute('class', 'poster-small');

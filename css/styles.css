@@ -56,6 +56,11 @@ ul {
   margin-top: 180px;
 }
 
+.bookmark-icon-button {
+  background: transparent;
+  border: none;
+}
+
 #bookmark-icon {
   color: white;
   padding: 0 5px;
@@ -152,8 +157,6 @@ ul {
   margin-bottom: 25px;
   margin-top: 0;
 }
-
-/* search results */
 
 .row-search-results {
   padding-top: 20px;
@@ -342,7 +345,6 @@ ul {
   margin-top: 15px;
 }
 
-/* text styling */
 input {
   font-size: 1.1rem;
 }
