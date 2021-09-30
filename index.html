@@ -65,7 +65,15 @@
           </div>
         </form>
         <p class="search-message white font-roboto text-center"></p>
-        <ul>
+        <div class="loading-spinner text-center">
+          <div class="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+        <ul class="ul-results">
         </ul>
       </div>
       <div data-view="search-result-detailed" id="search-result-detailed" class="view hidden">
@@ -77,13 +85,13 @@
           </div>
         </form>
         <div class="row row-back">
-          <button class="back-button" type="button"><i class="fas fa-angle-left back-icon"></i></button>
+          <button class="back-button hidden" type="button"><i class="fas fa-angle-left back-icon"></i></button>
         </div>
       </div>
       <div data-view="watchlist" id="watchlist" class="view hidden">
         <div class="row row-back row-watchlist-header white">
           <div class="column">
-            <button class="back-button-watchlist" type="button"><i class="fas fa-angle-left back-icon"></i></button>
+            <button class="back-button-watchlist hidden" type="button"><i class="fas fa-angle-left back-icon"></i></button>
           </div>
           <div class="column-my-watchlist">
             <h1 class="my-watchlist-text font-roboto justify-center">My Watchlist</h1>

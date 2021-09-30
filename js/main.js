@@ -15,6 +15,7 @@ var $ulElement = document.querySelector('ul');
 var $ulWatchlist = document.querySelector('.ul-watchlist');
 var $colNav = document.querySelector('.col-nav');
 var $emptyWatchlistCaption = document.querySelector('.empty-watchlist-caption');
+var $loadingSpinner = document.querySelector('.loading-spinner');
 
 $searchFormHome.addEventListener('submit', submitSearch);
 function submitSearch(event) {
@@ -45,7 +46,7 @@ function submitSearchResults(event) {
   data.nextSearchId++;
 
   getMovieData(data.searchHistory[0].keyword);
-  var $allList = document.querySelectorAll('li');
+  var $allList = document.querySelectorAll('.search-results-padding');
   for (var i = 0; i < $allList.length; i++) {
     $allList[i].remove();
   }
@@ -59,11 +60,26 @@ function getMovieData(search) {
   xhr.addEventListener('load', function () {
     renderMovieDOMTrees(xhr.response.Search);
     $searchMessage.textContent = 'Showing results for ' + '\'' + $searchBarResults.value + '\'';
+    $loadingSpinner.className = 'loading-spinner text-center hidden';
+  });
+
+  xhr.addEventListener('error', function () {
+    $searchMessage.textContent = 'Sorry, there was an error connecting to the network. Please check your internet connection.';
+    $loadingSpinner.className = 'loading-spinner text-center hidden';
   });
   xhr.send();
+  $loadingSpinner.className = 'loading-spinner text-center';
 }
 
 function renderMovieDOMTrees(response) {
+  if (response === undefined) {
+    $searchMessage.textContent = 'No results. Try a different keyword.';
+    $loadingSpinner.className = 'loading-spinner text-center hidden';
+  }
+  var $allList = document.querySelectorAll('.search-results-padding');
+  for (var n = 0; n < $allList.length; n++) {
+    $allList[n].remove();
+  }
   for (var i = 0; i < response.length; i++) {
     var domTree = renderResponse(response[i]);
     var ulElement = document.querySelector('ul');
@@ -116,6 +132,10 @@ function switchView(view) {
   if (view === 'search-home') {
     $movieJournalNav.className = 'movie-journal-anchor white font-roboto hidden';
     $colNav.className = 'col-nav justify-right';
+    var $allSearchResults = document.querySelectorAll('.search-results-padding');
+    for (var n = 0; n < $allSearchResults.length; n++) {
+      $allSearchResults[n].remove();
+    }
   }
   if (view === 'search-results') {
     $colNav.className = 'col-nav justify-right';
@@ -151,7 +171,7 @@ function renderResponse(entry) {
   var $pHiddenID = document.createElement('p');
   $resultCard.setAttribute('class', 'search-results-padding');
   $resultCard.setAttribute('imdbid', entry.imdbID);
-  $rowCard.setAttribute('class', 'row search-result-card');
+  $rowCard.setAttribute('class', 'row search-result-card grow');
   $columnPoster.setAttribute('class', 'column-card-poster');
   $imgPoster.setAttribute('class', 'poster-small');
   $imgPoster.setAttribute('src', entry.Poster);
@@ -283,7 +303,6 @@ function renderDetailed(entry) {
   $plusButtonBig.appendChild($plusIconBig);
   $rowCardAdd.appendChild($columnAddCaption);
   $columnAddCaption.appendChild($addCaption);
-
   return $detailedCard;
 }
 
@@ -303,7 +322,7 @@ function renderWatchlist(entry) {
   var $pHidden = document.createElement('p');
   $watchlistCard.setAttribute('class', 'watchlist-cards-list-padding');
   $watchlistCard.setAttribute('imdbid', entry.id);
-  $rowWatchlistCard.setAttribute('class', 'row watchlist-list-card');
+  $rowWatchlistCard.setAttribute('class', 'row watchlist-list-card grow');
   $columnCardPoster.setAttribute('class', 'column-card-poster');
   $imgPosterSmall.setAttribute('class', 'poster-small');
   $imgPosterSmall.setAttribute('src', entry.posterURL);
@@ -345,6 +364,7 @@ function selectCard(event) {
 
   apiRequestIDDetailed(imdbID);
   switchView('search-result-detailed');
+  $backButtonDetailed.className = 'back-button';
   data.selectedCardID = imdbID;
 }
 
@@ -380,14 +400,18 @@ $myWatchlistNav.addEventListener('click', goWatchlist);
 $bookmarkIconNav.addEventListener('click', goWatchlist);
 function goWatchlist(event) {
   switchView('watchlist');
-  $backButtonWatchlist.className = 'back-button-watchlist hidden';
+  $backButtonWatchlist.className = 'back-button-watchlist';
 }
 
 $backButtonDetailed.addEventListener('click', goBack);
 $backButtonWatchlist.addEventListener('click', goBack);
 function goBack(event) {
-  switchView('search-results');
-  $searchMessage.textContent = 'Showing results for ' + '\'' + $searchBarResults.value + '\'';
+  if ($searchBarResults.value === '') {
+    switchView('search-home');
+    $searchMessage.textContent = 'Showing results for ' + '\'' + $searchBarResults.value + '\'';
+  } else {
+    switchView('search-results');
+  }
 }
 
 function viewWatchlistCaptionUpdate() {
@@ -434,12 +458,11 @@ function addToSavedInData(event) {
 
 document.addEventListener('DOMContentLoaded', loadedPage);
 function loadedPage(event) {
-  $searchBarResults.value = data.searchHistory[0].keyword;
-  getMovieData(data.searchHistory[0].keyword);
-
   switchView(data.view);
   if (data.view === 'search-results') {
     $movieJournalNav.className = 'movie-journal-anchor white font-roboto';
+    $searchBarResults.value = data.searchHistory[0].keyword;
+    getMovieData(data.searchHistory[0].keyword);
   }
   if (data.view === 'search-result-detailed') {
     apiRequestIDDetailed(data.selectedCardID);
