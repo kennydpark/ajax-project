@@ -38,7 +38,6 @@ function submitSearch(event) {
 
 $searchFormResults.addEventListener('submit', submitSearchResults);
 function submitSearchResults(event) {
-  // $loadingSpinner.className = 'loading-spinner text-center';
   event.preventDefault();
   var searchValue = {};
   searchValue.keyword = $searchBarResults.value;
@@ -47,7 +46,7 @@ function submitSearchResults(event) {
   data.nextSearchId++;
 
   getMovieData(data.searchHistory[0].keyword);
-  var $allList = document.querySelectorAll('li');
+  var $allList = document.querySelectorAll('.search-results-padding');
   for (var i = 0; i < $allList.length; i++) {
     $allList[i].remove();
   }
@@ -63,6 +62,11 @@ function getMovieData(search) {
     $searchMessage.textContent = 'Showing results for ' + '\'' + $searchBarResults.value + '\'';
     $loadingSpinner.className = 'loading-spinner text-center hidden';
   });
+
+  xhr.addEventListener('error', function () {
+    $searchMessage.textContent = 'Sorry, there was an error connecting to the network. Please check your internet connection.';
+    $loadingSpinner.className = 'loading-spinner text-center hidden';
+  });
   xhr.send();
   $loadingSpinner.className = 'loading-spinner text-center';
 }
@@ -72,8 +76,7 @@ function renderMovieDOMTrees(response) {
     $searchMessage.textContent = 'No results. Try a different keyword.';
     $loadingSpinner.className = 'loading-spinner text-center hidden';
   }
-  // $loadingSpinner.className = 'loading-spinner text-center';
-  var $allList = document.querySelectorAll('li');
+  var $allList = document.querySelectorAll('.search-results-padding');
   for (var n = 0; n < $allList.length; n++) {
     $allList[n].remove();
   }
@@ -81,11 +84,6 @@ function renderMovieDOMTrees(response) {
     var domTree = renderResponse(response[i]);
     var ulElement = document.querySelector('ul');
     ulElement.appendChild(domTree);
-    // var $results = document.querySelectorAll('.search-results-padding');
-    // if ($results.length > 0) {
-    //   $loadingSpinner.className = 'loading-spinner text-center hidden';
-    //   console.log('loaded');
-    // }
     apiRequestID(response[i].imdbID);
   }
 }
@@ -132,7 +130,6 @@ function switchView(view) {
     }
   }
   if (view === 'search-home') {
-    // $loadingSpinner.className = 'loading-spinner text-center';
     $movieJournalNav.className = 'movie-journal-anchor white font-roboto hidden';
     $colNav.className = 'col-nav justify-right';
     var $allSearchResults = document.querySelectorAll('.search-results-padding');
@@ -174,7 +171,7 @@ function renderResponse(entry) {
   var $pHiddenID = document.createElement('p');
   $resultCard.setAttribute('class', 'search-results-padding');
   $resultCard.setAttribute('imdbid', entry.imdbID);
-  $rowCard.setAttribute('class', 'row search-result-card');
+  $rowCard.setAttribute('class', 'row search-result-card grow');
   $columnPoster.setAttribute('class', 'column-card-poster');
   $imgPoster.setAttribute('class', 'poster-small');
   $imgPoster.setAttribute('src', entry.Poster);
@@ -325,7 +322,7 @@ function renderWatchlist(entry) {
   var $pHidden = document.createElement('p');
   $watchlistCard.setAttribute('class', 'watchlist-cards-list-padding');
   $watchlistCard.setAttribute('imdbid', entry.id);
-  $rowWatchlistCard.setAttribute('class', 'row watchlist-list-card');
+  $rowWatchlistCard.setAttribute('class', 'row watchlist-list-card grow');
   $columnCardPoster.setAttribute('class', 'column-card-poster');
   $imgPosterSmall.setAttribute('class', 'poster-small');
   $imgPosterSmall.setAttribute('src', entry.posterURL);
@@ -367,6 +364,7 @@ function selectCard(event) {
 
   apiRequestIDDetailed(imdbID);
   switchView('search-result-detailed');
+  $backButtonDetailed.className = 'back-button';
   data.selectedCardID = imdbID;
 }
 
@@ -402,14 +400,18 @@ $myWatchlistNav.addEventListener('click', goWatchlist);
 $bookmarkIconNav.addEventListener('click', goWatchlist);
 function goWatchlist(event) {
   switchView('watchlist');
-  $backButtonWatchlist.className = 'back-button-watchlist hidden';
+  $backButtonWatchlist.className = 'back-button-watchlist';
 }
 
 $backButtonDetailed.addEventListener('click', goBack);
 $backButtonWatchlist.addEventListener('click', goBack);
 function goBack(event) {
-  switchView('search-results');
-  $searchMessage.textContent = 'Showing results for ' + '\'' + $searchBarResults.value + '\'';
+  if ($searchBarResults.value === '') {
+    switchView('search-home');
+    $searchMessage.textContent = 'Showing results for ' + '\'' + $searchBarResults.value + '\'';
+  } else {
+    switchView('search-results');
+  }
 }
 
 function viewWatchlistCaptionUpdate() {
@@ -447,6 +449,10 @@ function addToSavedInData(event) {
       data.savedCards.unshift(cardDataForWatchlist);
       var watchlistNewCard = renderWatchlist(data.savedCards[0]);
       $ulWatchlist.prepend(watchlistNewCard);
+      for (var x = 0; x < data.savedCards.length; x++) {
+        var watchlistDomTree = renderWatchlist(data.savedCards[x]);
+        $ulWatchlist.appendChild(watchlistDomTree);
+      }
     } else if ($addToWatchlist.textContent === 'View Watchlist') {
       switchView('watchlist');
       $backButtonWatchlist.className = 'back-button-watchlist';
@@ -456,9 +462,6 @@ function addToSavedInData(event) {
 
 document.addEventListener('DOMContentLoaded', loadedPage);
 function loadedPage(event) {
-  // $searchBarResults.value = data.searchHistory[0].keyword;
-  // getMovieData(data.searchHistory[0].keyword);
-
   switchView(data.view);
   if (data.view === 'search-results') {
     $movieJournalNav.className = 'movie-journal-anchor white font-roboto';

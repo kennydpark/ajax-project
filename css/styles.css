@@ -53,7 +53,7 @@ ul {
   position: relative;
   width: 90%;
   margin: 0 auto;
-  margin-top: 30%;
+  margin-top: 25%;
 }
 
 .bookmark-icon-button {
@@ -421,4 +421,12 @@ input {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.grow {
+  transition: all 0.2s ease-in-out;
+}
+
+.grow:hover {
+  transform: scale(1.05);
 }
