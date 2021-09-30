@@ -449,10 +449,6 @@ function addToSavedInData(event) {
       data.savedCards.unshift(cardDataForWatchlist);
       var watchlistNewCard = renderWatchlist(data.savedCards[0]);
       $ulWatchlist.prepend(watchlistNewCard);
-      for (var x = 0; x < data.savedCards.length; x++) {
-        var watchlistDomTree = renderWatchlist(data.savedCards[x]);
-        $ulWatchlist.appendChild(watchlistDomTree);
-      }
     } else if ($addToWatchlist.textContent === 'View Watchlist') {
       switchView('watchlist');
       $backButtonWatchlist.className = 'back-button-watchlist';
