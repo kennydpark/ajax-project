@@ -55,7 +55,6 @@ function submitSearchResults(event) {
 function getMovieData(search) {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://www.omdbapi.com/?apikey=67ac1937' + '&s=' + search);
-
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     renderMovieDOMTrees(xhr.response.Search);
@@ -150,7 +149,6 @@ function renderResponse(entry) {
   var $pGenre = document.createElement('p');
   var $rowGenre = document.createElement('div');
   var $pHiddenID = document.createElement('p');
-
   $resultCard.setAttribute('class', 'search-results-padding');
   $resultCard.setAttribute('imdbid', entry.imdbID);
   $rowCard.setAttribute('class', 'row search-result-card');
@@ -163,12 +161,10 @@ function renderResponse(entry) {
   $pYear.setAttribute('class', 'search-result-year');
   $pGenre.setAttribute('class', 'search-result-genre');
   $pHiddenID.setAttribute('class', 'hidden');
-
   $h3Title.textContent = entry.Title;
   $pYear.textContent = entry.Year;
   $pGenre.textContent = entry.imdbID;
   $pHiddenID.textContent = entry.imdbID;
-
   $resultCard.appendChild($rowCard);
   $rowCard.appendChild($columnPoster);
   $columnPoster.appendChild($imgPoster);
@@ -214,7 +210,6 @@ function renderDetailed(entry) {
   var $spanDirector = document.createElement('span');
   var $spanCast = document.createElement('span');
   var $pHiddenID = document.createElement('p');
-
   $detailedCard.setAttribute('class', 'detailed-card font-roboto');
   $rowCardPoster.setAttribute('class', 'row row-card-poster');
   $imgPosterBig.setAttribute('class', 'poster-big');
@@ -306,8 +301,8 @@ function renderWatchlist(entry) {
   var $rowGenre = document.createElement('div');
   var $pGenre = document.createElement('p');
   var $pHidden = document.createElement('p');
-
   $watchlistCard.setAttribute('class', 'watchlist-cards-list-padding');
+  $watchlistCard.setAttribute('imdbid', entry.id);
   $rowWatchlistCard.setAttribute('class', 'row watchlist-list-card');
   $columnCardPoster.setAttribute('class', 'column-card-poster');
   $imgPosterSmall.setAttribute('class', 'poster-small');
@@ -325,7 +320,6 @@ function renderWatchlist(entry) {
   $pGenre.textContent = entry.genre;
   $pHidden.setAttribute('class', 'hidden');
   $pHidden.textContent = entry.id;
-
   $watchlistCard.appendChild($rowWatchlistCard);
   $rowWatchlistCard.appendChild($columnCardPoster);
   $columnCardPoster.appendChild($imgPosterSmall);
@@ -338,7 +332,6 @@ function renderWatchlist(entry) {
   $columnCardInfo.appendChild($rowGenre);
   $rowGenre.appendChild($pGenre);
   $columnCardInfo.appendChild($pHidden);
-
   return $watchlistCard;
 }
 
@@ -429,7 +422,6 @@ function addToSavedInData(event) {
       cardDataForWatchlist.cast = $castElement.textContent;
       cardDataForWatchlist.plot = $plotElement.textContent;
       cardDataForWatchlist.id = $idElement.textContent;
-
       data.savedCards.unshift(cardDataForWatchlist);
       var watchlistNewCard = renderWatchlist(data.savedCards[0]);
       $ulWatchlist.prepend(watchlistNewCard);
