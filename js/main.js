@@ -15,6 +15,7 @@ var $ulElement = document.querySelector('ul');
 var $ulWatchlist = document.querySelector('.ul-watchlist');
 var $colNav = document.querySelector('.col-nav');
 var $emptyWatchlistCaption = document.querySelector('.empty-watchlist-caption');
+var $loadingSpinner = document.querySelector('.loading-spinner');
 
 $searchFormHome.addEventListener('submit', submitSearch);
 function submitSearch(event) {
@@ -37,6 +38,7 @@ function submitSearch(event) {
 
 $searchFormResults.addEventListener('submit', submitSearchResults);
 function submitSearchResults(event) {
+  // $loadingSpinner.className = 'loading-spinner text-center';
   event.preventDefault();
   var searchValue = {};
   searchValue.keyword = $searchBarResults.value;
@@ -59,15 +61,31 @@ function getMovieData(search) {
   xhr.addEventListener('load', function () {
     renderMovieDOMTrees(xhr.response.Search);
     $searchMessage.textContent = 'Showing results for ' + '\'' + $searchBarResults.value + '\'';
+    $loadingSpinner.className = 'loading-spinner text-center hidden';
   });
   xhr.send();
+  $loadingSpinner.className = 'loading-spinner text-center';
 }
 
 function renderMovieDOMTrees(response) {
+  if (response === undefined) {
+    $searchMessage.textContent = 'No results. Try a different keyword.';
+    $loadingSpinner.className = 'loading-spinner text-center hidden';
+  }
+  // $loadingSpinner.className = 'loading-spinner text-center';
+  var $allList = document.querySelectorAll('li');
+  for (var n = 0; n < $allList.length; n++) {
+    $allList[n].remove();
+  }
   for (var i = 0; i < response.length; i++) {
     var domTree = renderResponse(response[i]);
     var ulElement = document.querySelector('ul');
     ulElement.appendChild(domTree);
+    // var $results = document.querySelectorAll('.search-results-padding');
+    // if ($results.length > 0) {
+    //   $loadingSpinner.className = 'loading-spinner text-center hidden';
+    //   console.log('loaded');
+    // }
     apiRequestID(response[i].imdbID);
   }
 }
@@ -114,8 +132,13 @@ function switchView(view) {
     }
   }
   if (view === 'search-home') {
+    // $loadingSpinner.className = 'loading-spinner text-center';
     $movieJournalNav.className = 'movie-journal-anchor white font-roboto hidden';
     $colNav.className = 'col-nav justify-right';
+    var $allSearchResults = document.querySelectorAll('.search-results-padding');
+    for (var n = 0; n < $allSearchResults.length; n++) {
+      $allSearchResults[n].remove();
+    }
   }
   if (view === 'search-results') {
     $colNav.className = 'col-nav justify-right';
@@ -283,7 +306,6 @@ function renderDetailed(entry) {
   $plusButtonBig.appendChild($plusIconBig);
   $rowCardAdd.appendChild($columnAddCaption);
   $columnAddCaption.appendChild($addCaption);
-
   return $detailedCard;
 }
 
@@ -434,12 +456,14 @@ function addToSavedInData(event) {
 
 document.addEventListener('DOMContentLoaded', loadedPage);
 function loadedPage(event) {
-  $searchBarResults.value = data.searchHistory[0].keyword;
-  getMovieData(data.searchHistory[0].keyword);
+  // $searchBarResults.value = data.searchHistory[0].keyword;
+  // getMovieData(data.searchHistory[0].keyword);
 
   switchView(data.view);
   if (data.view === 'search-results') {
     $movieJournalNav.className = 'movie-journal-anchor white font-roboto';
+    $searchBarResults.value = data.searchHistory[0].keyword;
+    getMovieData(data.searchHistory[0].keyword);
   }
   if (data.view === 'search-result-detailed') {
     apiRequestIDDetailed(data.selectedCardID);
