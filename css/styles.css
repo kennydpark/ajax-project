@@ -232,7 +232,13 @@ ul {
 
 .plus-icon-big {
   font-size: 3rem;
+  opacity: 0.8;
+  transition: 0.2s ease-in-out;
   cursor: pointer;
+}
+
+.plus-icon-big:hover {
+  opacity: 1;
 }
 
 .plus-button-big {
@@ -263,7 +269,13 @@ ul {
 .back-icon {
   color: white;
   font-size: 2rem;
+  opacity: 0.8;
+  transition: 0.2s ease-in-out;
   cursor: pointer;
+}
+
+.back-icon:hover {
+  opacity: 1;
 }
 
 .detailed-card {
