@@ -225,14 +225,9 @@ ul {
   padding-right: 15px;
 }
 
-.search-result-plus-icon {
-  font-size: 1.7rem;
-  cursor: pointer;
-}
-
 .plus-icon-big {
   font-size: 3rem;
-  opacity: 0.8;
+  opacity: 0.7;
   transition: 0.2s ease-in-out;
   cursor: pointer;
 }
@@ -269,7 +264,7 @@ ul {
 .back-icon {
   color: white;
   font-size: 2rem;
-  opacity: 0.8;
+  opacity: 0.7;
   transition: 0.2s ease-in-out;
   cursor: pointer;
 }
@@ -357,6 +352,34 @@ ul {
   margin-top: 15px;
 }
 
+.watchlist-row-remove {
+  margin: 20px 0;
+  margin-right: 30px;
+}
+
+.remove-icon {
+  color: white;
+  transition: 0.15s ease-in-out;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.remove-icon:hover {
+  color: red;
+}
+
+.remove-button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* .remove-text {
+  display: inline;
+  margin-bottom: 10px;
+  display: none;
+} */
+
 input {
   font-size: 1.1rem;
 }
@@ -429,4 +452,12 @@ input {
 
 .grow:hover {
   transform: scale(1.05);
+}
+
+.grow-icon {
+  transition: all 0.2s ease-in-out;
+}
+
+.grow-icon:hover {
+  transform: scale(1.2);
 }

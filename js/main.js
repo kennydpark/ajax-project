@@ -319,6 +319,10 @@ function renderWatchlist(entry) {
   var $pYear = document.createElement('p');
   var $rowGenre = document.createElement('div');
   var $pGenre = document.createElement('p');
+  var $rowRemove = document.createElement('div');
+  var $removeButton = document.createElement('button');
+  var $removeIcon = document.createElement('i');
+  // var $removeText = document.createElement('p');
   var $pHidden = document.createElement('p');
   $watchlistCard.setAttribute('class', 'watchlist-cards-list-padding');
   $watchlistCard.setAttribute('imdbid', entry.id);
@@ -336,6 +340,13 @@ function renderWatchlist(entry) {
   $pYear.textContent = entry.year;
   $rowGenre.setAttribute('class', 'watchlist-row-genre');
   $pGenre.setAttribute('class', 'watchlist-list-genre');
+  // remove
+  $rowRemove.setAttribute('class', 'watchlist-row-remove text-right');
+  $removeButton.setAttribute('class', 'remove-button grow-icon');
+  $removeIcon.setAttribute('class', 'fas fa-minus-circle remove-icon');
+  // $removeText.setAttribute('class', 'remove-text white font-roboto');
+  // $removeText.textContent = 'Remove';
+  // remove
   $pGenre.textContent = entry.genre;
   $pHidden.setAttribute('class', 'hidden');
   $pHidden.textContent = entry.id;
@@ -351,6 +362,10 @@ function renderWatchlist(entry) {
   $columnCardInfo.appendChild($rowGenre);
   $rowGenre.appendChild($pGenre);
   $columnCardInfo.appendChild($pHidden);
+  $rowGenre.appendChild($rowRemove);
+  $rowRemove.appendChild($removeButton);
+  $removeButton.appendChild($removeIcon);
+  // $rowRemove.appendChild($removeText);
   return $watchlistCard;
 }
 
