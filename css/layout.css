@@ -39,6 +39,23 @@
   margin-left: 10px;
 }
 
+.container-modal {
+  margin: auto;
+  background-color: #575757;
+}
+
+.container-modal-window {
+  width: 250px;
+  margin: auto;
+  background-color: #575757;
+  border-radius: 25px;
+}
+
+.column-modal-full {
+  width: 90%;
+  margin: auto;
+}
+
 @media screen and (min-width: 768px) {
   .container {
     max-width: 900px;
@@ -98,5 +115,13 @@
 
   .column-add-caption {
     width: 40%;
+  }
+
+  .container-modal-window {
+    width: 400px;
+  }
+
+  .column-modal-full {
+    width: 80%;
   }
 }
