@@ -18,7 +18,7 @@ var $emptyWatchlistCaption = document.querySelector('.empty-watchlist-caption');
 var $loadingSpinner = document.querySelector('.loading-spinner');
 var $containerModal = document.querySelector('.container-modal');
 var $containerModalWindow = document.querySelector('.container-modal-window');
-var $cancelButtonModal = document.querySelector('.cancel-button-modal');
+// var $cancelButtonModal = document.querySelector('.cancel-button-modal');
 // var $removeButtonModal = document.querySelector('.remove-button-modal');
 
 $searchFormHome.addEventListener('submit', submitSearch);
@@ -496,11 +496,17 @@ $ulWatchlist.addEventListener('click', removeButtonHandler);
 function removeButtonHandler(event) {
   if (event.target.className === 'fas fa-minus-circle remove-icon') {
     $containerModal.className = 'container-modal overlay';
+    $containerModalWindow.className = 'container-modal-window';
   }
 }
 
-$cancelButtonModal.addEventListener('click', cancelButtonModalHandler);
+$containerModalWindow.addEventListener('click', cancelButtonModalHandler);
 function cancelButtonModalHandler(event) {
-  $containerModal.className = 'container-modal hidden';
-  $containerModalWindow.className = 'container-modal-window hidden';
+  if (event.target.className === 'cancel-button-modal white font-roboto') {
+    $containerModal.className = 'container-modal hidden';
+    $containerModalWindow.className = 'container-modal-window hidden';
+  } else if (event.target.className === 'remove-button-modal white font-roboto') {
+    $containerModal.className = 'container-modal hidden';
+    $containerModalWindow.className = 'container-modal-window hidden';
+  }
 }
