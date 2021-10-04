@@ -18,8 +18,6 @@ var $emptyWatchlistCaption = document.querySelector('.empty-watchlist-caption');
 var $loadingSpinner = document.querySelector('.loading-spinner');
 var $containerModal = document.querySelector('.container-modal');
 var $containerModalWindow = document.querySelector('.container-modal-window');
-// var $cancelButtonModal = document.querySelector('.cancel-button-modal');
-// var $removeButtonModal = document.querySelector('.remove-button-modal');
 
 $searchFormHome.addEventListener('submit', submitSearch);
 function submitSearch(event) {
@@ -327,7 +325,6 @@ function renderWatchlist(entry) {
   var $rowRemove = document.createElement('div');
   var $removeButton = document.createElement('button');
   var $removeIcon = document.createElement('i');
-  // var $removeText = document.createElement('p');
   var $pHidden = document.createElement('p');
   $watchlistCard.setAttribute('class', 'watchlist-cards-list-padding');
   $watchlistCard.setAttribute('imdbid', entry.id);
@@ -346,13 +343,9 @@ function renderWatchlist(entry) {
   $rowGenre.setAttribute('class', 'watchlist-row-genre');
   $pGenre.setAttribute('class', 'watchlist-list-genre');
   $rowBottom.setAttribute('class', 'watchlist-row-bottom');
-  // remove
   $rowRemove.setAttribute('class', 'watchlist-row-remove text-right');
   $removeButton.setAttribute('class', 'remove-button grow-icon');
   $removeIcon.setAttribute('class', 'fas fa-minus-circle remove-icon');
-  // $removeText.setAttribute('class', 'remove-text white font-roboto');
-  // $removeText.textContent = 'Remove';
-  // remove
   $pGenre.textContent = entry.genre;
   $pHidden.setAttribute('class', 'hidden');
   $pHidden.textContent = entry.id;
@@ -371,7 +364,6 @@ function renderWatchlist(entry) {
   $rowGenre.appendChild($rowRemove);
   $rowRemove.appendChild($removeButton);
   $removeButton.appendChild($removeIcon);
-  // $rowRemove.appendChild($removeText);
   return $watchlistCard;
 }
 
