@@ -322,6 +322,7 @@ function renderWatchlist(entry) {
   var $rowYear = document.createElement('div');
   var $pYear = document.createElement('p');
   var $rowGenre = document.createElement('div');
+  var $rowBottom = document.createElement('div');
   var $pGenre = document.createElement('p');
   var $rowRemove = document.createElement('div');
   var $removeButton = document.createElement('button');
@@ -344,6 +345,7 @@ function renderWatchlist(entry) {
   $pYear.textContent = entry.year;
   $rowGenre.setAttribute('class', 'watchlist-row-genre');
   $pGenre.setAttribute('class', 'watchlist-list-genre');
+  $rowBottom.setAttribute('class', 'watchlist-row-bottom');
   // remove
   $rowRemove.setAttribute('class', 'watchlist-row-remove text-right');
   $removeButton.setAttribute('class', 'remove-button grow-icon');
@@ -497,15 +499,27 @@ function removeButtonHandler(event) {
   if (event.target.className === 'fas fa-minus-circle remove-icon') {
     $containerModal.className = 'container-modal overlay';
     $containerModalWindow.className = 'container-modal-window';
+    data.removing = event.target.closest('li').getAttribute('imdbid');
   }
 }
 
-$containerModalWindow.addEventListener('click', cancelButtonModalHandler);
-function cancelButtonModalHandler(event) {
+$containerModalWindow.addEventListener('click', buttonModalHandler);
+function buttonModalHandler(event) {
+  var $allWatchlistCards = document.querySelectorAll('.watchlist-cards-list-padding');
   if (event.target.className === 'cancel-button-modal white font-roboto') {
     $containerModal.className = 'container-modal hidden';
     $containerModalWindow.className = 'container-modal-window hidden';
   } else if (event.target.className === 'remove-button-modal white font-roboto') {
+    for (var i = 0; i < $allWatchlistCards.length; i++) {
+      if ($allWatchlistCards[i].getAttribute('imdbid') === data.removing) {
+        $allWatchlistCards[i].remove();
+      }
+    }
+    for (var n = 0; n < data.savedCards.length; n++) {
+      if (data.savedCards[n].id === data.removing) {
+        data.savedCards.splice(n, 1);
+      }
+    }
     $containerModal.className = 'container-modal hidden';
     $containerModalWindow.className = 'container-modal-window hidden';
   }
