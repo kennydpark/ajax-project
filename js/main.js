@@ -16,6 +16,8 @@ var $ulWatchlist = document.querySelector('.ul-watchlist');
 var $colNav = document.querySelector('.col-nav');
 var $emptyWatchlistCaption = document.querySelector('.empty-watchlist-caption');
 var $loadingSpinner = document.querySelector('.loading-spinner');
+var $containerModal = document.querySelector('.container-modal');
+var $containerModalWindow = document.querySelector('.container-modal-window');
 
 $searchFormHome.addEventListener('submit', submitSearch);
 function submitSearch(event) {
@@ -318,7 +320,11 @@ function renderWatchlist(entry) {
   var $rowYear = document.createElement('div');
   var $pYear = document.createElement('p');
   var $rowGenre = document.createElement('div');
+  var $rowBottom = document.createElement('div');
   var $pGenre = document.createElement('p');
+  var $rowRemove = document.createElement('div');
+  var $removeButton = document.createElement('button');
+  var $removeIcon = document.createElement('i');
   var $pHidden = document.createElement('p');
   $watchlistCard.setAttribute('class', 'watchlist-cards-list-padding');
   $watchlistCard.setAttribute('imdbid', entry.id);
@@ -336,6 +342,10 @@ function renderWatchlist(entry) {
   $pYear.textContent = entry.year;
   $rowGenre.setAttribute('class', 'watchlist-row-genre');
   $pGenre.setAttribute('class', 'watchlist-list-genre');
+  $rowBottom.setAttribute('class', 'watchlist-row-bottom');
+  $rowRemove.setAttribute('class', 'watchlist-row-remove text-right');
+  $removeButton.setAttribute('class', 'remove-button grow-icon');
+  $removeIcon.setAttribute('class', 'fas fa-minus-circle remove-icon');
   $pGenre.textContent = entry.genre;
   $pHidden.setAttribute('class', 'hidden');
   $pHidden.textContent = entry.id;
@@ -351,6 +361,9 @@ function renderWatchlist(entry) {
   $columnCardInfo.appendChild($rowGenre);
   $rowGenre.appendChild($pGenre);
   $columnCardInfo.appendChild($pHidden);
+  $rowGenre.appendChild($rowRemove);
+  $rowRemove.appendChild($removeButton);
+  $removeButton.appendChild($removeIcon);
   return $watchlistCard;
 }
 
@@ -470,5 +483,36 @@ function loadedPage(event) {
   for (var n = 0; n < data.savedCards.length; n++) {
     var watchlistDomTree = renderWatchlist(data.savedCards[n]);
     $ulWatchlist.appendChild(watchlistDomTree);
+  }
+}
+
+$ulWatchlist.addEventListener('click', removeButtonHandler);
+function removeButtonHandler(event) {
+  if (event.target.className === 'fas fa-minus-circle remove-icon') {
+    $containerModal.className = 'container-modal overlay';
+    $containerModalWindow.className = 'container-modal-window';
+    data.removing = event.target.closest('li').getAttribute('imdbid');
+  }
+}
+
+$containerModalWindow.addEventListener('click', buttonModalHandler);
+function buttonModalHandler(event) {
+  var $allWatchlistCards = document.querySelectorAll('.watchlist-cards-list-padding');
+  if (event.target.className === 'cancel-button-modal white font-roboto') {
+    $containerModal.className = 'container-modal hidden';
+    $containerModalWindow.className = 'container-modal-window hidden';
+  } else if (event.target.className === 'remove-button-modal white font-roboto') {
+    for (var i = 0; i < $allWatchlistCards.length; i++) {
+      if ($allWatchlistCards[i].getAttribute('imdbid') === data.removing) {
+        $allWatchlistCards[i].remove();
+      }
+    }
+    for (var n = 0; n < data.savedCards.length; n++) {
+      if (data.savedCards[n].id === data.removing) {
+        data.savedCards.splice(n, 1);
+      }
+    }
+    $containerModal.className = 'container-modal hidden';
+    $containerModalWindow.className = 'container-modal-window hidden';
   }
 }

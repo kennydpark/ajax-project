@@ -225,14 +225,9 @@ ul {
   padding-right: 15px;
 }
 
-.search-result-plus-icon {
-  font-size: 1.7rem;
-  cursor: pointer;
-}
-
 .plus-icon-big {
   font-size: 3rem;
-  opacity: 0.8;
+  opacity: 0.7;
   transition: 0.2s ease-in-out;
   cursor: pointer;
 }
@@ -269,7 +264,7 @@ ul {
 .back-icon {
   color: white;
   font-size: 2rem;
-  opacity: 0.8;
+  opacity: 0.7;
   transition: 0.2s ease-in-out;
   cursor: pointer;
 }
@@ -357,6 +352,71 @@ ul {
   margin-top: 15px;
 }
 
+.watchlist-row-remove {
+  margin: 20px 0;
+  margin-right: 30px;
+}
+
+.remove-icon {
+  color: white;
+  transition: 0.15s ease-in-out;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.remove-icon:hover {
+  color: red;
+}
+
+.remove-button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.modal-caption {
+  padding: 20px 0;
+  margin: auto;
+  line-height: 1.6rem;
+}
+
+.row-modal-buttons {
+  padding: 20px 0;
+  margin: auto;
+}
+
+.column-remove,
+.column-cancel {
+  width: 50%;
+}
+
+.cancel-button-modal,
+.remove-button-modal {
+  font-size: 1rem;
+  border-radius: 25px;
+  padding: 15px;
+  border: none;
+  cursor: pointer;
+}
+
+.cancel-button-modal {
+  background-color: #888;
+  transition: 0.15s ease-in-out;
+}
+
+.cancel-button-modal:hover {
+  background-color: rgba(136, 136, 136, 0.692);
+}
+
+.remove-button-modal {
+  background-color: rgb(255, 60, 25);
+  transition: 0.15s ease-in-out;
+}
+
+.remove-button-modal:hover {
+  background-color: rgb(219, 53, 24);
+}
+
 input {
   font-size: 1.1rem;
 }
@@ -428,5 +488,25 @@ input {
 }
 
 .grow:hover {
-  transform: scale(1.05);
+  transform: scale(1.03);
+}
+
+.grow-icon {
+  transition: all 0.2s ease-in-out;
+}
+
+.grow-icon:hover {
+  transform: scale(1.2);
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

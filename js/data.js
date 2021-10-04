@@ -5,7 +5,8 @@ var data = {
   editing: null,
   nextSearchId: 1,
   selectedCardID: '',
-  savedCards: []
+  savedCards: [],
+  removing: null
 };
 
 window.addEventListener('beforeunload', beforeUnload);
