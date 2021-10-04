@@ -71,7 +71,7 @@
   }
 
   .search-result-card {
-    height: 280px;
+    height: 100%;
   }
 
   .column-card-info {
@@ -79,7 +79,7 @@
   }
 
   .poster-small {
-    height: 280px;
+    height: 100%;
     width: 100%;
   }
 
