@@ -394,7 +394,8 @@ ul {
 .remove-button-modal {
   font-size: 1rem;
   border-radius: 25px;
-  padding: 15px;
+  padding: 15px 0;
+  width: 88px;
   border: none;
   cursor: pointer;
 }
