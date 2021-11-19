@@ -345,7 +345,8 @@ function renderWatchlist(entry) {
   $rowBottom.setAttribute('class', 'watchlist-row-bottom');
   $rowRemove.setAttribute('class', 'watchlist-row-remove text-right');
   $removeButton.setAttribute('class', 'remove-button grow-icon');
-  $removeIcon.setAttribute('class', 'fas fa-minus-circle remove-icon');
+  $removeIcon.setAttribute('class', 'fas fa-trash remove-icon');
+
   $pGenre.textContent = entry.genre;
   $pHidden.setAttribute('class', 'hidden');
   $pHidden.textContent = entry.id;
@@ -488,7 +489,8 @@ function loadedPage(event) {
 
 $ulWatchlist.addEventListener('click', removeButtonHandler);
 function removeButtonHandler(event) {
-  if (event.target.className === 'fas fa-minus-circle remove-icon') {
+  if (event.target.className === 'fas fa-trash remove-icon') {
+
     $containerModal.className = 'container-modal overlay';
     $containerModalWindow.className = 'container-modal-window';
     data.removing = event.target.closest('li').getAttribute('imdbid');
