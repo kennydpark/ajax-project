@@ -64,10 +64,6 @@ ul {
   margin-left: auto;
 }
 
-.row-nav-full {
-  margin-top: 10px;
-}
-
 .column-nav-full {
   width: 90%;
   margin: auto;
@@ -94,7 +90,7 @@ ul {
 
 .movie-journal-anchor {
   font-weight: bolder;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   cursor: pointer;
 }
 
@@ -220,6 +216,7 @@ ul {
 
 .poster-big {
   object-fit: cover;
+  object-position: 100% 10%;
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
   width: 100%;
@@ -363,7 +360,7 @@ ul {
 /* watchlist */
 
 .row-watchlist-header {
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 
 .column-my-watchlist {
