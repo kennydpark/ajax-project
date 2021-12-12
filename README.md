@@ -7,7 +7,7 @@ A web application for movie enthusiasts who want to keep track of movies, as wel
 
 ## Live Demo
 
-Try the application live at [kennydpark.github.io/movie-journal](https://kennydpark.github.io/movie-journal)
+Try the application live [here](https://kennydpark.github.io/movie-journal).
 
 
 ## Technologies Used
